@@ -8,28 +8,28 @@
     <div class="row mt-5 mb-3">  
       <div class="col-md-12">  
         <div class="float-left">  
-          <h1 class="mb-0">{{ destination.name }}</h1>  
-          <p>Popular Destination</p>  
+          <h1 class="mb-0">{{ event.name }}</h1>  
+          <p>Popular Event</p>  
         </div>  
  
         <div class="float-right text-right">  
           <p class="mb-0">1 AUD equals</p>  
-          <h2 id="exchange-rate">0.62 {{ destination.currency }}</h1>  
+          <h2 id="exchange-rate">0.62 {{ event.currency }}</h1>  
         </div>  
       </div>  
     </div>  
  
-    <!-- Destination --> 
+    <!-- Event --> 
     <div class="row">  
       <div class="col-md-12">  
         <div class="card my-3">  
           <div class="card-body">  
             <div class="media">  
-              <img src="{{ destination.image }}" class="img-fluid image_crop mr-3">
+              <img src="{{ event.image }}" class="img-fluid image_crop mr-3">
               <div class="media-body">  
                 <small class="font-weight-bold text-muted">Stay 2 nights</small>  
-                <h5 class="mt-0">{{ destination.name }}</h5>  
-                <p>{{ destination.description }}</p>  
+                <h5 class="mt-0">{{ event.name }}</h5>  
+                <p>{{ event.description }}</p>  
                 <a href="#" class="btn btn-danger">Book Now</a>  
               </div>  
             </div>  
@@ -46,9 +46,9 @@
     </div>  
  
     <div class="row border-bottom"> 
-      {{ render_form(form,"/destinations/{0}/comment".format(destination.id)) }}
+      {{ render_form(form,"/events/{0}/comment".format(event.id)) }}
       
-      {% for comment in destination.comments %}
+      {% for comment in event.comments %}
       <div class="col-md-12">  
         <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.created_at.strftime("%-d %b %y at %-I:%M %p") }}</span></b>
         <p>{{ comment.text }}</p>  

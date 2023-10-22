@@ -17,16 +17,16 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"Name: {self.name}"
 
-class Destination(db.Model):
-    __tablename__ = 'destinations'
+class Event(db.Model):
+    __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
     currency = db.Column(db.String(3))
     # ... Create the Comments db.relationship
-	# relation to call destination.comments and comment.destination
-    comments = db.relationship('Comment', backref='destination')
+	# relation to call event.comments and comment.event
+    comments = db.relationship('Comment', backref='event')
 
 	# string print method
     def __repr__(self):
@@ -39,7 +39,7 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    destination_id = db.Column(db.Integer, db.ForeignKey('destinations.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
     # string print method
     def __repr__(self):
