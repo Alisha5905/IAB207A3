@@ -98,14 +98,14 @@
 
 #Genre.searchInput,
 #genre.createEvent {
-    background-image: url("../image/genre.svg");
+    background-image: url("../svg/genre.svg");
     background-repeat: no-repeat;
     background-size: 23px 23px;
     background-position: right;
 }
 
 #Date.searchInput {
-    background-image: url("../image/date.svg");
+    background-image: url("../svg/date.svg");
     background-repeat: no-repeat;
     background-size: 30px 20px;
     background-position: right;
@@ -113,7 +113,7 @@
 
 #Location.searchInput,
 #location.createEvent {
-    background-image: url("../image/location.svg");
+    background-image: url("../svg/location.svg");
     background-repeat: no-repeat;
     background-size: 30px 23px;
     background-position: right;
@@ -156,7 +156,7 @@
 
 /* create event page */
 #artist.createEvent {
-    background-image: url("../image/artist.svg");
+    background-image: url("../svg/artist.svg");
     background-repeat: no-repeat;
     background-size: 25px 20px;
     background-position: right;
@@ -216,7 +216,7 @@ input[type=file] {
     cursor: pointer;
     margin-bottom: 10px;
     background-color: rgba(226, 226, 226);
-    background-image: url("../image/cloud.svg");
+    background-image: url("../svg/cloud.svg");
     background-position-x: left;
     background-repeat: no-repeat;
     background-size: contain;
