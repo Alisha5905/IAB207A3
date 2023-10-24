@@ -7,12 +7,15 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), index=True, unique=True, nullable=False)
     emailid = db.Column(db.String(100), index=True, nullable=False)
+    phoneid = db.Column(db.String(10), index=True, nullable=False)
 	#password is never stored in the DB, an encrypted password is stored
 	# the storage should be at least 255 chars long
     password_hash = db.Column(db.String(255), nullable=False)
     # relation to call user.comments and comment.created_by
     comments = db.relationship('Comment', backref='user')
+    bookings = db.relationship('Booking', backref='user')
 
+    
     # string print method
     def __repr__(self):
         return f"Name: {self.name}"
@@ -23,10 +26,33 @@ class Event(db.Model):
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
-    currency = db.Column(db.String(3))
+    location = db.Column(db.String(80))
+    genre = db.Column(db.String(80))
+    startDate = db.Column(db.DateTime)
+    endDate = db.Column(db.DateTime)
+    status = db.Column(db.String(15))
+    type = db.Column(db.String(80))
+    amount = db.Column(db.Integer)
+    cost = db.Column(db.decimal)
     # ... Create the Comments db.relationship
 	# relation to call event.comments and comment.event
     comments = db.relationship('Comment', backref='event')
+    bookings = db.relationship('Booking', backref='user')
+
+	# string print method
+    def __repr__(self):
+        return f"Name: {self.name}"
+    
+class Booking(db.Model):
+    __tablename__ = 'bookings'
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(80))
+    amount = db.Column(db.Integer)
+    cost = db.Column(db.decimal)
+    date = db.Column(db.DateTime)
+    # add the foreign keys
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
 
 	# string print method
     def __repr__(self):

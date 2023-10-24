@@ -105,7 +105,7 @@
                                 <img src="../../static/svg/location.svg">
                              </div>
                              <div>
-                                <p class="eventDetails" id="location" style="margin:auto;">Brisbane</p>
+                                <p class="eventDetails" id="location" style="margin:auto;">{{ event.location }}</p>
                              </div>
                           </div>
                        </row>
@@ -115,7 +115,7 @@
                                 <img src="../../static/svg/date.svg">
                              </div>
                              <div>
-                                <p class="eventDetails" id="startDate">19 September 2023 5:00pm-8:00pm</p>
+                                <p class="eventDetails" id="startDate">{{ event.startDate }}</p>
                              </div>
                           </div>
                        </row>
@@ -124,8 +124,8 @@
                           <div class="row">
                              <div class="d-flex justify-content-around"
                                 style="margin-top: 20px; margin-bottom: 20px;">
-                                <div>General Admission:</div>
-                                <div> $18 </div>
+                                <div>{{ event.type }}:</div>
+                                <div>${{ event.cost }}</div>
                                 <input type="number" placeholder="0" style="width: 60px; padding-left: 10px;">
                              </div>
                           </div>
@@ -193,7 +193,7 @@
               <div class="eventDetails" id="label">Status:</div>
            </div>
            <div>
-              <p class="eventDetails" id="status">Open</p>
+              <p class="eventDetails" id="status">{{ event.status }}</p>
            </div>
         </div>
      </row>
@@ -208,7 +208,7 @@
               <div class="eventDetails" id="label">Genre:</div>
            </div>
            <div>
-              <p class="eventDetails" id="genre">Otamatone</p> <!-- change to {{ event.genre }}-->
+              <p class="eventDetails" id="genre">{{ event.genre }}</p>
            </div>
         </div>
      </row>
@@ -220,10 +220,10 @@
               <img src="../../static/svg/artist.svg">
            </div>
            <div style="margin-right: 10px; margin-left: 5px;">
-              <div class="eventDetails" id="label">Artist/Artists:</div> <!-- change to {{ event.artist }}-->
+              <div class="eventDetails" id="label">Artist/Artists:</div>
            </div>
            <div>
-              <p class="eventDetails" id="artist">Ota & Matone</p>
+              <p class="eventDetails" id="artist">{{ event.artist }}</p>
            </div>
         </div>
      </row>
@@ -238,7 +238,7 @@
               <div class="eventDetails" id="label">Location:</div>
            </div>
            <div>
-              <p class="eventDetails" id="location">Brisbane</p> <!-- change to {{ event.location }}-->
+              <p class="eventDetails" id="location">{{ event.location }}</p> 
            </div>
         </div>
      </row>
@@ -253,7 +253,7 @@
               <div class="eventDetails" id="label">Start Date & Time:</div>
            </div>
            <div>
-              <p class="eventDetails" id="startDate">19 September 2023 5:00pm</p> <!-- change to {{ event.startDate }}-->
+              <p class="eventDetails" id="startDate">{{ event.startDate }}</p> 
            </div>
         </div>
      </row>
@@ -268,7 +268,7 @@
               <div class="eventDetails" id="label">End Date & Time:</div>
            </div>
            <div>
-              <p class="eventDetails" id="endDate">19 September 2023 8:00pm</p> <!-- change to {{ event.endDate }}-->
+              <p class="eventDetails" id="endDate">{{ event.endDate }}</p> 
            </div>
         </div>
      </row>
