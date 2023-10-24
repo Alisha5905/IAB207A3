@@ -52,15 +52,15 @@
          <div class="row" style="width: 100%">
 
             <div class="col">
-               <a class=logo role="button" href="{{ url_for('main.index') }}">
-                  <img src="static/image/Capture.PNG" alt="Logo" height="55" style="margin-left: 8px;">
+               <a role="button" href="{{ url_for('main.index') }}">
+                  <img id="logo" src="/static/image/Capture.PNG" alt="Logo" height="55" style="margin-left: 8px;">
                </a>
             </div>
             <div class="col">
                <div class="d-flex justify-content-end align-items-center">
 
                   <a data-bs-toggle="dropdown" aria-dropeffect="move">
-                     <img src="static/svg/user-4-fill.svg" alt="User Icon" class="userIcon">
+                     <img src="/static/svg/user-4-fill.svg" alt="User Icon" class="userIcon">
                   </a>
                   <ul class="dropdown-menu">
                   {% if current_user.is_authenticated %}
@@ -114,6 +114,25 @@
       </div>
    </div>
    <div class="main">
+      <!-- flashes any messages to the user -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %} <!-- check if there are any messages -->
+      <div class="container-fluid">
+         <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+            {% for message in messages %} <!--loop through the messages-->
+            <div class="alert alert-info">{{ message }}</div> <!--display as alert-->
+            {% endfor %}
+         </div>
+      </div>
+      </div>
+      {% endif %}
+      {% endwith %}
+    
+      {% block header %}
+
+      {% endblock %}
+
    {% block content %}
 
    {% endblock %}
@@ -131,5 +150,44 @@
           </div>
       </div>
   </footer>
-   
+   <!-- JS script for popups -->
+<script>
+   buyTicket.addEventListener("click", function () {
+      buyTicketPopup.classList.add("show");
+   });
+   closePopup.addEventListener("click", function () {
+      buyTicketPopup.classList.remove("show");
+   });
+   window.addEventListener("click", function (event) {
+      if (event.target == buyTicketPopup) {
+         buyTicketPopup.classList.remove("show");
+      }
+   });
+
+   buyButton.addEventListener("click", function () {
+      confirmation.classList.add("show");
+      buyTicketPopup.classList.remove("show");
+
+   });
+   closePopupConfirmation.addEventListener("click", function () {
+      confirmation.classList.remove("show");
+   });
+   window.addEventListener("click", function (event) {
+      if (event.target == confirmation) {
+         confirmation.classList.remove("show");
+      }
+   });
+
+   comment.addEventListener("click", function () {
+      commentPopup.classList.add("show");
+   });
+   closePopupComment.addEventListener("click", function () {
+      commentPopup.classList.remove("show");
+   });
+   window.addEventListener("click", function (event) {
+      if (event.target == commentPopup) {
+         commentPopup.classList.remove("show");
+      }
+   });
+</script>
 </html>

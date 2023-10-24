@@ -175,11 +175,18 @@ input[type=file] {
 input[type=date],
 input[type=time],
 input[type=number],
-textarea {
-    border-radius: 11px;
-    font-size: small;
-    background-color: rgba(226, 226, 226);
-    border-color: rgba(226, 226, 226);
+textarea, .commentForm textarea {
+    border-radius: 11px !important;
+    font-size: small !important;
+    background-color: rgba(226, 226, 226) !important;
+    border-color: rgba(226, 226, 226) !important;
+}
+div.row.createEvent textarea {
+    margin-bottom: 20px !important; 
+    min-height:100px !important;
+    padding-left: 2px !important;
+    padding-bottom: 6px !important;
+    background-color: rgb(226, 226, 226) !important;
 }
 
 #description.createEvent {
@@ -305,16 +312,21 @@ input[type=file] {
 .popup-content button,
 .popup-content-confirm input[type=submit],
 #postComment,
-#return {
+#return, div.row.createEvent input[type=submit] {
     display: block;
     margin: 0 auto;
     border-radius: 11px;
     margin-bottom: 15px;
     color: rgba(245, 245, 245);
-    border-color: rgba(245, 245, 245);
+    border-color: rgba(245, 245, 245) !important;
     background-color: rgba(93, 143, 171);
     padding-left: 15px;
     padding-right: 15px;
+    text-decoration: none !important;
+}
+
+div.row.createEvent input[type=submit] {
+    width: 100%;
 }
 
 .show {
