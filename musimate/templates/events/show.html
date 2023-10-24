@@ -50,7 +50,9 @@
       
       {% for comment in event.comments %}
       <div class="col-md-12">  
-        <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.created_at.strftime("%-d %b %y at %-I:%M %p") }}</span></b>
+        <!-- caused a 500 error when I tried to open event page with -> ("%-d %b %y at %-I:%M %p")-->
+        <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.created_at.strftime("%d/%m/%Y at %H:%M") }}</span></b>
+        
         <p>{{ comment.text }}</p>  
       </div> 
       {% endfor %} 
