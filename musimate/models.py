@@ -44,3 +44,15 @@ class Comment(db.Model):
     # string print method
     def __repr__(self):
         return f"Comment: {self.text}"
+    
+class Order(db.Model):
+    __tablename__ = 'orders'
+    order_id = db.Column(db.Integer, primary_key = True)
+    quantity = db.Column(db.Integer)
+    booked_at = db.Column(db.DateTime, default = datetime.now())
+    #foreign keys
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    event_id = db.Column(db.Integer, db.ForeignKey("events.id"))
+
+    def __repr__(self):
+        return f"Order: {self.order_id}"

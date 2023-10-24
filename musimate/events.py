@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event, Comment
-from .forms import EventForm, CommentForm
+from .models import Event, Comment, Order
+from .forms import EventForm, CommentForm, OrderForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -68,3 +68,16 @@ def comment(id):
       # print('Your comment has been added', 'success') 
     # using redirect sends a GET request to event.show
     return redirect(url_for('event.show', id=id))
+
+@eventbp.route('/<id>/order',methods = ['GET','POST'])
+@login_required
+def order(id):
+   form = OrderForm()
+   event = db.session.scalar(db.select(Event).where(Event.id==id))
+   if form.validate_on_submit():
+      order = Order(quantity = form.quantity.data, event=event,
+                    user=current_user)
+      db.session.add(order)
+      db.session.commit
+      flash('Your order has been placed\n'+f'Your order number is:{order.order_id}', 'success')
+      return redirect(url_for('event.show',id=id))

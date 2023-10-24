@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField
-from wtforms.validators import InputRequired, Email, EqualTo, Length, DataRequired
+from wtforms.fields import TextAreaField, SubmitField, StringField, PasswordField, IntegerField
+from wtforms.validators import InputRequired, Email, EqualTo, Length, DataRequired, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
@@ -37,3 +37,11 @@ class RegisterForm(FlaskForm):
 class CommentForm(FlaskForm):
   text = TextAreaField('Comment', [InputRequired()])
   submit = SubmitField('Create')
+
+
+#User order
+class OrderForm(FlaskForm):
+   quantity = IntegerField("Order", 
+                          validators=[InputRequired(), NumberRange(min=1, max=10, 
+                          message="please entre a quantity between 1 and 10")])
+   submit = SubmitField("Place Order")
