@@ -33,7 +33,7 @@ class Event(db.Model):
     status = db.Column(db.String(15))
     type = db.Column(db.String(80))
     amount = db.Column(db.Integer)
-    cost = db.Column(db.decimal)
+    cost = db.Column(db.Integer)
     # ... Create the Comments db.relationship
 	# relation to call event.comments and comment.event
     comments = db.relationship('Comment', backref='event')
@@ -48,7 +48,7 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(80))
     amount = db.Column(db.Integer)
-    cost = db.Column(db.decimal)
+    cost = db.Column(db.Integer)
     date = db.Column(db.DateTime)
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
