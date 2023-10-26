@@ -7,13 +7,16 @@ ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 
 #Create new event
 class EventForm(FlaskForm):
-  name = StringField('Country', validators=[InputRequired()])
+  name = StringField('Event Name', validators=[InputRequired()])
   description = TextAreaField('Description', 
             validators=[InputRequired()])
+  location = TextAreaField('Location', validators=[InputRequired()])
+  # possibly make this a date time input 
+  date = TextAreaField("Date", validators=[InputRequired()])
   image = FileField('Event Image', validators=[
     FileRequired(message='Image cannot be empty'),
     FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
-  currency = StringField('Currency', validators=[InputRequired()])
+  price = StringField('Price', validators=[InputRequired()])
   submit = SubmitField("Create")
     
 #User login

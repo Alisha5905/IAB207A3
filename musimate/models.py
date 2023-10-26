@@ -14,6 +14,8 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(255), nullable=False)
     # relation to call user.comments and comment.created_by
     comments = db.relationship('Comment', backref='user')
+    # realation to call user.orders and order.placed_by
+    orders = db.relationship("Order", backref='user')
 
     # string print method
     def __repr__(self):
@@ -24,11 +26,16 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
+    location = db.Column(db.String(200))
+    # possibly make this a date time format
+    date = db.Column(db.String(200))
     image = db.Column(db.String(400))
-    currency = db.Column(db.String(3))
+    price = db.Column(db.String(3))
     # ... Create the Comments db.relationship
 	# relation to call event.comments and comment.event
     comments = db.relationship('Comment', backref='event')
+    # relation to call event.orders and order.event
+    orders = db.relationship('Order', backref = 'event')
 
 	# string print method
     def __repr__(self):
