@@ -26,8 +26,10 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     user_name = StringField("User Name", validators=[DataRequired(), Length(min=4, max=32, message="Username must be between 4 and 32 characters")])
     email_id = StringField("Email Address", validators=[DataRequired(), Email("Please enter a valid email"),Length(max=32, message="Email must be under 32 characters")])
+    contact_number = StringField("Contact Number", validators=[DataRequired(), Length(min=7, max=15, message="Contact number must be between 7 and 15 digits")])
+    address = TextAreaField("Address", validators=[DataRequired()])
     #linking two fields - password should be equal to data entered in confirm
-    password = PasswordField("Password", validators=[DataRequired(), Length(min=6, message="Password must be at least 6 characters long"), EqualTo('confirm', message="Passwords should match")])
+    password = PasswordField("Password", validators=[DataRequired(), Length(min=4, message="Password must be at least 6 characters long"), EqualTo('confirm', message="Passwords should match")])
     confirm = PasswordField("Confirm Password", validators=[DataRequired()])
     #submit button
     submit = SubmitField("Register")
