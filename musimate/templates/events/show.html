@@ -130,9 +130,9 @@
                              </div>
                           </div>
                           <!--- order form -->
-                          <div class = "row">
-                           {{render_form(order_form,"/events/{0}/order").format(event.id)}}
-                          </div>
+                          <div class = "row orderForm">
+                                 {{render_form(order_form,"/events/{0}/order").format(event.id)}}
+                           </div>
                           <div class="row">
                              <div class="d-flex justify-content-left summary" style="margin-top: 10px;">
                                 <div style="padding-right: 10px;">Total Cost:</div>
