@@ -50,7 +50,7 @@
     </div>  
  
     <div class="row border-bottom"> 
-      {{ render_form(form,"/events/{0}/comment".format(event.id)) }}
+      {{ render_form(comment_form,"/events/{0}/comment".format(event.id)) }}
       
       {% for comment in event.comments %}
       <div class="col-md-12">  
@@ -105,7 +105,7 @@
                                 <img src="../../static/svg/location.svg">
                              </div>
                              <div>
-                                <p class="eventDetails" id="location" style="margin:auto;">Brisbane</p>
+                                <p class="eventDetails" id="location" style="margin:auto;">{{event.location}}</p>
                              </div>
                           </div>
                        </row>
@@ -115,7 +115,7 @@
                                 <img src="../../static/svg/date.svg">
                              </div>
                              <div>
-                                <p class="eventDetails" id="startDate">{{event.startDate}}</p>
+                                <p class="eventDetails" id="startDate">{{event.date}}</p>
                              </div>
                           </div>
                        </row>
@@ -125,9 +125,13 @@
                              <div class="d-flex justify-content-around"
                                 style="margin-top: 20px; margin-bottom: 20px;">
                                 <div>General Admission:</div>
-                                <div> $18 </div>
-                                <input type="number" placeholder="0" style="width: 60px; padding-left: 10px;">
+                                <div> {{event.price}} </div>
+                                
                              </div>
+                          </div>
+                          <!--- order form -->
+                          <div class = "row">
+                           {{render_form(order_form,"/events/{0}/order").format(event.id)}}
                           </div>
                           <div class="row">
                              <div class="d-flex justify-content-left summary" style="margin-top: 10px;">
@@ -309,7 +313,7 @@
                     </row>
                     <!--<form>-->
                        <div class="row createEvent">
-                          {{ render_form(form,"/events/{0}/comment".format(event.id)) }}
+                          {{ render_form(comment_form,"/events/{0}/comment".format(event.id)) }}
                           <!--                          <textarea class="createEvent" id="commentBox"
                              style="margin-bottom: 20px; height:100px;"></textarea>
                           <br>

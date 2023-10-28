@@ -13,8 +13,9 @@ eventbp = Blueprint('event', __name__, url_prefix='/events')
 def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     # create the comment form
-    form = CommentForm()    
-    return render_template('events/show.html', event=event, form=form)
+    comment_form = CommentForm()
+    order_form = OrderForm()
+    return render_template('events/show.html', event=event, comment_form=comment_form, order_form = order_form)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
