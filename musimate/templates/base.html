@@ -89,12 +89,17 @@
        <!-- Event search bar -->
        <div class="searchBar">
          <form>
-            <div class="d-flex justify-content-between">
-               <div class="input-group" style="justify-content: center;">
-                  <div>
-                     <lable for="Genre" style="color:white; font-size:small; font-weight: bold;">Genre </label>
-                        <input class="searchInput" type="text" id="Genre" placeholder="Pop">
-                  </div>
+           <div class="d-flex justify-content-between">
+             <div class="input-group" style="justify-content: center;">
+               <div>
+                 <label for="Genre" style="color:white; font-size:small; font-weight: bold;">Genre </label>
+                 <select class="searchInput" id="Genre">
+                   <option value="pop">Pop</option>
+                   <option value="classical">Classical</option>
+                   <option value="rock">Rock</option>
+                   <option value="jazz">Jazz</option>
+                 </select>
+               </div>
                   <div>
                      <label for="Location"
                         style="color:white; font-size:small; font-weight: bold;">Location</label>
