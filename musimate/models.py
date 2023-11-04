@@ -6,12 +6,14 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users' # good practice to specify table name
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), index=True, unique=True, nullable=False)
-    emailid = db.Column(db.String(100), index=True, nullable=False)
+    email = db.Column(db.String(100), index=True, nullable=False)
     contact_number = db.Column(db.String(15), nullable=True)
     address = db.Column(db.String(255), nullable=True)
 	#password is never stored in the DB, an encrypted password is stored
 	# the storage should be at least 255 chars long
     password_hash = db.Column(db.String(255), nullable=False)
+    # relation to call user.comments and comment.created_by
+    events = db.relationship('Event', backref='user')
     # relation to call user.comments and comment.created_by
     comments = db.relationship('Comment', backref='user')
     # realation to call user.orders and order.placed_by
@@ -26,12 +28,14 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
+    genre = db.Column(db.String(40))
     location = db.Column(db.String(200))
     # possibly make this a date time format
     date = db.Column(db.String(200))
     image = db.Column(db.String(400))
-    price = db.Column(db.String(3))
-    # ... Create the Comments db.relationship
+    price = db.Column(db.Integer)
+    # add the foreign keys
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	# relation to call event.comments and comment.event
     comments = db.relationship('Comment', backref='event')
     # relation to call event.orders and order.event
