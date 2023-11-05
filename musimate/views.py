@@ -10,7 +10,6 @@ def index():
     events = db.session.scalars(db.select(Event)).all()
     genres = db.session.scalars(db.select(Event.genre.distinct())).all()
     num_events = len(events)
-    print(num_events)
     return render_template('index.html', events=events, num_events=num_events, genres=genres, selected_genre='Select', selected_location='', selected_date='')
 
 
