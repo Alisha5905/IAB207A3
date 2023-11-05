@@ -9,7 +9,9 @@ mainbp = Blueprint('main', __name__)
 def index():
     events = db.session.scalars(db.select(Event)).all()
     genres = db.session.scalars(db.select(Event.genre.distinct())).all()
-    return render_template('index.html', events=events, genres=genres, selected_genre='Select', selected_location='', selected_date='')
+    num_events = len(events)
+    print(num_events)
+    return render_template('index.html', events=events, num_events=num_events, genres=genres, selected_genre='Select', selected_location='', selected_date='')
 
 
 @mainbp.route('/search')
@@ -24,11 +26,10 @@ def search():
         genres = db.session.scalars(
             db.select(Event.genre.distinct()).where(Event.genre.is_not(request.args["genre"])))
         if request.args['genre'] == "All" or request.args['genre'] == "Select":
-            selected_genre = "Select"
             events = db.session.scalars(
-                db.select(Event).where(Event.location.like(location)).where(Event.date.like(date)))
+                db.select(Event).where(Event.location.like(location)).where(Event.date.like(date))).all()
         else:
-            selected_genre = request.args['genre']
             events = db.session.scalars(
-                db.select(Event).where(Event.genre.is_(genre)).where(Event.location.ilike(location)).where(Event.date.ilike(date)))
-        return render_template('index.html', events=events, genres=genres, selected_genre=selected_genre, selected_location=request.args['location'], selected_date=request.args['date'])
+                db.select(Event).where(Event.genre.is_(genre)).where(Event.location.ilike(location)).where(Event.date.ilike(date))).all()
+        num_events = len(events)
+        return render_template('index.html', events=events, num_events=num_events, genres=genres, selected_genre=request.args['genre'], selected_location=request.args['location'], selected_date=request.args['date'])

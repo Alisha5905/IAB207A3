@@ -95,7 +95,9 @@
                  <label for="Genre" style="color:white; font-size:small; font-weight: bold;">Genre </label>
                  <select class="searchInput" name="genre" id="Genre">
                   <option value="{{ selected_genre }}">{{ selected_genre }}</option>
+                  {% if selected_genre != "All" %}
                   <option value="All">All</option>
+                  {% endif %}
                   {% for genre in genres %}
                    <option value="{{ genre }}">{{ genre }}</option>
                    {% endfor %}

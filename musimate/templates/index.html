@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 
-{% block content %}   
+{% block content %}
 
-
-         <div class="card-group">
-            {% for event in events %}
-            <!-- <div class="card mx-3">
+{% if num_events == 0 %}
+<div class="d-flex p-4 justify-content-center">
+   <h4>No Events</h4>
+</div>
+{% else %}
+<div class="card-group">
+   {% for event in events %}
+   <!-- <div class="card mx-3">
                <img class="card-img-top"
                   src="{{ event.image }}" alt="event picture">
                <div class="card-body">
@@ -15,32 +19,101 @@
                </div>
                <div class="card-footer"><a href="{{ url_for('event.show', id=event.id) }}" class ="btn btn-danger"> View Details </a></div>
             </div>> -->
+   <div class="col-lg-3 col-md-4 col-sm-6 lastCard">
+      <a href="{{ url_for('event.show', id=event.id) }}" style="text-decoration:none">
+         <div class="card border-light">
+            <img class="card-img-top" src="{{ event.image }}" alt="Card image" style="width:100%">
+            <div class="card-body">
+               <row class="row">
+                  <div class="d-flex justify-content-left">
+                     <div>
+                        <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: blue;"> Status:</p>
+                     </div>
+                     <div>
+                        <p class="cardDetails" id="status"
+                           style="font-size: small; margin-left:3px; margin-bottom:5px; color: blue;">
+                           {{ event.status }}</p>
+                     </div>
+                  </div>
+               </row>
+               <h5 class="card-title">{{ event.name }}</h5>
+               <row class="row">
+                  <div class="d-flex justify-content-left">
+                     <div>
+                        <img src="static/svg/location.svg" class="cardIcons">
+                     </div>
+                     <div>
+                        <p class="cardDetails" id="location" style="margin:auto;">{{ event.location }}</p>
+                     </div>
+                  </div>
+               </row>
+               <row class="row">
+                  <div class="d-flex justify-content-left">
+                     <div>
+                        <img src="static/svg/date.svg" class="cardIcons">
+                     </div>
+                     <div>
+                        <p class="cardDetails" id="Date">{{ event.date }}</p>
+                     </div>
+                  </div>
+               </row>
+            </div>
+         </div>
+      </a>
+   </div>
+   {% endfor %}
+</div>
+{% endif %}
+<div class="main">
+   <br>
+   <!-- First set of event summary cards (upcoming/closest) -->
+   <h2 style="margin-left: 20px;">Upcoming Events:</h2>
+
+   <div class="break">
+      <div class="d-flex justify-content-end">
+         <button class="breakButton" id="viewMore">View More ></button>
+      </div>
+   </div>
+   <div class="padding">
+      <div class="row">
+         <div class="card-group">
+            <!-- Event Card 1 -->
             <div class="col-lg-3 col-md-4 col-sm-6 lastCard">
-               <a href="{{ url_for('event.show', id=event.id) }}" style="text-decoration:none">
+               <a href="EventDetails.html" style="text-decoration:none">
                   <div class="card border-light">
-                     <img class="card-img-top" src="{{ event.image }}" alt="Card image" style="width:100%">
+                     <img class="card-img-top" src="static/image/otamatone.jpg" alt="Card image" style="width:100%">
                      <div class="card-body">
                         <row class="row">
                            <div class="d-flex justify-content-left">
                               <div>
-                                 <p class="cardDetails"
-                                    style="font-size:small; margin-bottom:5px; color: blue;"> Status:</p>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: blue;">
+                                    Status:</p>
                               </div>
                               <div>
                                  <p class="cardDetails" id="status"
                                     style="font-size: small; margin-left:3px; margin-bottom:5px; color: blue;">
-                                    {{ event.status }}</p>
+                                    Sold Out</p>
                               </div>
                            </div>
                         </row>
-                        <h5 class="card-title">{{ event.name }}</h5>
+                        <h5 class="card-title">Otamatone Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">Ota & Matone</p>
+                              </div>
+                           </div>
+                        </row>
                         <row class="row">
                            <div class="d-flex justify-content-left">
                               <div>
                                  <img src="static/svg/location.svg" class="cardIcons">
                               </div>
                               <div>
-                                 <p class="cardDetails" id="location" style="margin:auto;">{{ event.location }}</p>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
                               </div>
                            </div>
                         </row>
@@ -50,7 +123,7 @@
                                  <img src="static/svg/date.svg" class="cardIcons">
                               </div>
                               <div>
-                                 <p class="cardDetails" id="Date">{{ event.date }}</p>
+                                 <p class="cardDetails" id="startDate">19 September 2023 5:00pm-8:00pm</p>
                               </div>
                            </div>
                         </row>
@@ -58,511 +131,440 @@
                   </div>
                </a>
             </div>
-            {% endfor %}
+            <!-- Event Card 2 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 hiddenTiny">
+               <a href="EventDetails.html" style="text-decoration:none">
+                  <div class="card border-light">
+                     <img class="card-img-top" src="static/image/event2.jpg" alt="Card image" style="width:100%">
+
+                     <div class="card-body">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: green;">
+                                    Status:</p>
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="status"
+                                    style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
+                                    Open</p>
+                              </div>
+                           </div>
+                        </row>
+                        <h5 class="card-title">Classical Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">W. A. Mozart</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/location.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Gold Coast</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/date.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="startDate">20 September 2023 4:00pm-6:00pm</p>
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </a>
+            </div>
+            <!-- Event Card 3 -->
+            <div class="col-lg-3 col-md-4 hiddenSmall">
+               <a href="EventDetails.html" style="text-decoration:none">
+                  <div class="card border-light">
+                     <img class="card-img-top" src="static/image/event3.jpg" alt="Card image" style="width:100%">
+
+                     <div class="card-body">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: red;"> Status:
+                                 </p>
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="status"
+                                    style="font-size: small; margin-left:3px; margin-bottom:5px; color: red;">
+                                    Cancelled</p>
+                              </div>
+                           </div>
+                        </row>
+                        <h5 class="card-title">Heavy Metal Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">Mr. Metal</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/location.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/date.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="startDate">20 September 2023 8:00pm-11:59pm</p>
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </a>
+            </div>
+            <!-- Event Card 4 -->
+            <div class="col-lg-3 hiddenMedium">
+               <a href="EventDetails.html" style="text-decoration:none">
+                  <div class="card border-light">
+                     <img class="card-img-top" src="static/image/event4.png" alt="Card image" style="width:100%">
+
+                     <div class="card-body">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: green;">
+                                    Status:</p>
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="status"
+                                    style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
+                                    Open</p>
+                              </div>
+                           </div>
+                        </row>
+                        <h5 class="card-title">Jazz Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">Mr. Jazz</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/location.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Sydney</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/date.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="startDate">21 September 2023 3:00pm-6:00pm</p>
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </a>
+            </div>
          </div>
+
       </div>
-      <div class="main">
-         <br>
-         <!-- First set of event summary cards (upcoming/closest) -->
-         <h2 style="margin-left: 20px;">Upcoming Events:</h2>
-
-         <div class="break">
-            <div class="d-flex justify-content-end">
-               <button class="breakButton" id="viewMore">View More ></button>
-            </div>
-         </div>
-         <div class="padding">
-            <div class="row">
-               <div class="card-group">
-                  <!-- Event Card 1 -->
-                  <div class="col-lg-3 col-md-4 col-sm-6 lastCard">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/otamatone.jpg" alt="Card image" style="width:100%">
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: blue;"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: blue;">
-                                          Sold Out</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Otamatone Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">Ota & Matone</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">19 September 2023 5:00pm-8:00pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-                  <!-- Event Card 2 -->
-                  <div class="col-lg-3 col-md-4 col-sm-6 hiddenTiny">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/event2.jpg" alt="Card image" style="width:100%">
-
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: green;"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
-                                          Open</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Classical Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">W. A. Mozart</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Gold Coast</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">20 September 2023 4:00pm-6:00pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-                  <!-- Event Card 3 -->
-                  <div class="col-lg-3 col-md-4 hiddenSmall">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/event3.jpg" alt="Card image" style="width:100%">
-
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: red;"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: red;">
-                                          Cancelled</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Heavy Metal Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">Mr. Metal</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">20 September 2023 8:00pm-11:59pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-                  <!-- Event Card 4 -->
-                  <div class="col-lg-3 hiddenMedium">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/event4.png" alt="Card image" style="width:100%">
-
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: green;"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
-                                          Open</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Jazz Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">Mr. Jazz</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Sydney</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">21 September 2023 3:00pm-6:00pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-               </div>
-
-            </div>
-            <!-- Automatic Carousel -->
-            <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-               <div class="carousel-inner">
-                  <div class="carousel-item active">
-                     <img src="static/image/music1.jpg" class="d-block w-100" alt="Audience at a concert">
-                     <div class="carousel-content">
-                        <p>Bringing Music Enthusiasts Together</p>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <img src="static/image/music2.jpg" class="d-block w-100" alt="4 men on stage singing">
-                     <div class="carousel-content">
-                        <p>Sharing Experiences</p>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <img src="static/image/music3.jpg" class="d-block w-100" alt="FOMO concert">
-                     <div class="carousel-content">
-                        <p>Making Memories</p>
-                     </div>
-                  </div>
+      <!-- Automatic Carousel -->
+      <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+         <div class="carousel-inner">
+            <div class="carousel-item active">
+               <img src="static/image/music1.jpg" class="d-block w-100" alt="Audience at a concert">
+               <div class="carousel-content">
+                  <p>Bringing Music Enthusiasts Together</p>
                </div>
             </div>
-         </div>
-         <br>
-         <!-- Second lot of event summary cards (popularity, most tickets sold/comments)-->
-         <h2 style="margin-left: 20px;">Popular Events:</h2>
-         <div class="break">
-            <div class="d-flex justify-content-end">
-               <button class="breakButton" id="viewMore">View More></button>
-            </div>
-         </div>
-         <div class="padding">
-            <div class="row">
-               <div class="card-group">
-                  <!-- Event Card 1 -->
-                  <div class="col-lg-3 col-md-4 col-sm-6 lastCard">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/otamatone.jpg" alt="Card image" style="width:100%">
-
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: blue;"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: blue;">
-                                          Sold Out</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Otamatone Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">Ota & Matone</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">19 September 2023 5:00pm-8:00pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-                  <!-- Event Card 2 -->
-                  <div class="col-lg-3 col-md-4 col-sm-6 hiddenTiny">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/event6.jpg" alt="Card image" style="width:100%">
-
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: grey;"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: grey;">
-                                          Inactive</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Rap Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">The Man</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Gold Coast</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">1 September 2023 4:00pm-6:00pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-                  <!-- Event Card 3 -->
-                  <div class="col-lg-3 col-md-4 hiddenSmall">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/event5.jpeg" alt="Card image" style="width:100%">
-
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: green"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
-                                          Open</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Country Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">Mr. Country</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">30 September 2023 8:00pm-11:59pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-                  <!-- Event Card 4 -->
-                  <div class="col-lg-3 hiddenMedium">
-                     <a href="EventDetails.html" style="text-decoration:none">
-                        <div class="card border-light">
-                           <img class="card-img-top" src="static/image/event4.png" alt="Card image" style="width:100%">
-
-                           <div class="card-body">
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <p class="cardDetails"
-                                          style="font-size:small; margin-bottom:5px; color: green;"> Status:</p>
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="status"
-                                          style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
-                                          Open</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <h5 class="card-title">Jazz Concert</h5>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/artist.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="artist" style="margin:auto;">Mr. Jazz</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/location.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="location" style="margin:auto;">Sydney</p>
-                                    </div>
-                                 </div>
-                              </row>
-                              <row class="row">
-                                 <div class="d-flex justify-content-left">
-                                    <div>
-                                       <img src="static/svg/date.svg" class="cardIcons">
-                                    </div>
-                                    <div>
-                                       <p class="cardDetails" id="startDate">21 September 2023 3:00pm-6:00pm</p>
-                                    </div>
-                                 </div>
-                              </row>
-                           </div>
-                        </div>
-                     </a>
-                  </div>
+            <div class="carousel-item">
+               <img src="static/image/music2.jpg" class="d-block w-100" alt="4 men on stage singing">
+               <div class="carousel-content">
+                  <p>Sharing Experiences</p>
                </div>
             </div>
-            <br>
-            <!-- Jumbotron -->
-            <div class="jumbotron">
-               <h1 class="display-4">Calling All Artists</h1>
-               <p class="lead">Are you an artist that wants to promote their latest upcoming show?</p>
-               <hr class="my-4">
-               <p>Sign up today to release your events on MusiMate!</p>
-               <a class="jumbotronButton" href="#" role="button">Register</a>
+            <div class="carousel-item">
+               <img src="static/image/music3.jpg" class="d-block w-100" alt="FOMO concert">
+               <div class="carousel-content">
+                  <p>Making Memories</p>
+               </div>
             </div>
          </div>
       </div>
+   </div>
+   <br>
+   <!-- Second lot of event summary cards (popularity, most tickets sold/comments)-->
+   <h2 style="margin-left: 20px;">Popular Events:</h2>
+   <div class="break">
+      <div class="d-flex justify-content-end">
+         <button class="breakButton" id="viewMore">View More></button>
+      </div>
+   </div>
+   <div class="padding">
+      <div class="row">
+         <div class="card-group">
+            <!-- Event Card 1 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 lastCard">
+               <a href="EventDetails.html" style="text-decoration:none">
+                  <div class="card border-light">
+                     <img class="card-img-top" src="static/image/otamatone.jpg" alt="Card image" style="width:100%">
+
+                     <div class="card-body">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: blue;">
+                                    Status:</p>
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="status"
+                                    style="font-size: small; margin-left:3px; margin-bottom:5px; color: blue;">
+                                    Sold Out</p>
+                              </div>
+                           </div>
+                        </row>
+                        <h5 class="card-title">Otamatone Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">Ota & Matone</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/location.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/date.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="startDate">19 September 2023 5:00pm-8:00pm</p>
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </a>
+            </div>
+            <!-- Event Card 2 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 hiddenTiny">
+               <a href="EventDetails.html" style="text-decoration:none">
+                  <div class="card border-light">
+                     <img class="card-img-top" src="static/image/event6.jpg" alt="Card image" style="width:100%">
+
+                     <div class="card-body">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: grey;">
+                                    Status:</p>
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="status"
+                                    style="font-size: small; margin-left:3px; margin-bottom:5px; color: grey;">
+                                    Inactive</p>
+                              </div>
+                           </div>
+                        </row>
+                        <h5 class="card-title">Rap Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">The Man</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/location.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Gold Coast</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/date.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="startDate">1 September 2023 4:00pm-6:00pm</p>
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </a>
+            </div>
+            <!-- Event Card 3 -->
+            <div class="col-lg-3 col-md-4 hiddenSmall">
+               <a href="EventDetails.html" style="text-decoration:none">
+                  <div class="card border-light">
+                     <img class="card-img-top" src="static/image/event5.jpeg" alt="Card image" style="width:100%">
+
+                     <div class="card-body">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: green">
+                                    Status:</p>
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="status"
+                                    style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
+                                    Open</p>
+                              </div>
+                           </div>
+                        </row>
+                        <h5 class="card-title">Country Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">Mr. Country</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/location.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/date.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="startDate">30 September 2023 8:00pm-11:59pm</p>
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </a>
+            </div>
+            <!-- Event Card 4 -->
+            <div class="col-lg-3 hiddenMedium">
+               <a href="EventDetails.html" style="text-decoration:none">
+                  <div class="card border-light">
+                     <img class="card-img-top" src="static/image/event4.png" alt="Card image" style="width:100%">
+
+                     <div class="card-body">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: green;">
+                                    Status:</p>
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="status"
+                                    style="font-size: small; margin-left:3px; margin-bottom:5px; color: green;">
+                                    Open</p>
+                              </div>
+                           </div>
+                        </row>
+                        <h5 class="card-title">Jazz Concert</h5>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/artist.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="artist" style="margin:auto;">Mr. Jazz</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/location.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="location" style="margin:auto;">Sydney</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="static/svg/date.svg" class="cardIcons">
+                              </div>
+                              <div>
+                                 <p class="cardDetails" id="startDate">21 September 2023 3:00pm-6:00pm</p>
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </a>
+            </div>
+         </div>
+      </div>
+      <br>
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+         <h1 class="display-4">Calling All Artists</h1>
+         <p class="lead">Are you an artist that wants to promote their latest upcoming show?</p>
+         <hr class="my-4">
+         <p>Sign up today to release your events on MusiMate!</p>
+         <a class="jumbotronButton" href="#" role="button">Register</a>
+      </div>
+   </div>
+</div>
 {% endblock %}
-   
