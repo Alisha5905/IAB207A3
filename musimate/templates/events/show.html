@@ -82,8 +82,11 @@
      <div>
         <div class="d-flex justify-content-end align-items-center" style=" height:100%">
            <!-- Button to look at buying tickets -->
+           {% if current_user.is_authenticated %}
            <button class="breakButton" id="buyTicket">Buy Tickets</button>
-
+            {% else %}
+           <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; " >Login to Buy Tickets</a>
+            {% endif %}
            <!-- Purchase ticket Popup -->
            <div id="buyTicketPopup" class="popup">
               <div class="d-flex justify-content-center">
