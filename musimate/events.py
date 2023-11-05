@@ -21,7 +21,6 @@ def show(id):
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
-  print('Method type: ', request.method)
   form = EventForm()
   if form.validate_on_submit():
     #call the function that checks and returns image
