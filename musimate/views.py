@@ -19,10 +19,8 @@ def search():
     date = "%" + request.args['date'] + "%"
 
     if request.args['genre'] == "Select" and location == "%%" and date == "%%":
-        print("None")
         return redirect(url_for('main.index'))
     else:
-        print(genre, location, date)
         genres = db.session.scalars(
             db.select(Event.genre.distinct()).where(Event.genre.is_not(request.args["genre"])))
         if request.args['genre'] == "All" or request.args['genre'] == "Select":
