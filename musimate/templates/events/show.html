@@ -245,7 +245,7 @@
               <div class="eventDetails" id="label">Date & Time:</div>
            </div>
            <div>
-              <p class="eventDetails" id="startDate">{{event.date}}</p>
+              <p class="eventDetails" id="startDate">{{event.date.strftime("%-d %b %y at %-I:%M %p")}}</p>
            </div>
         </div>
      </row>
@@ -307,7 +307,7 @@
            <div class="commentBox">
               <div style="font-weight:bold">{{ comment.user.name }}</div>
               <div style="margin-left:10px;">{{ comment.text }}</div>
-              <div class="d-flex justify-content-end" style="font-size: x-small;">{{ comment.created_at.strftime("%d/%m/%Y at %H:%M") }}</div>
+              <div class="d-flex justify-content-end" style="font-size: x-small;">{{ comment.created_at.strftime("%-d %b %y at %-I:%M %p") }}</div>
            </div>
         </row>
       {% endfor %} 

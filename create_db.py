@@ -1,6 +1,7 @@
 from musimate import db, create_app
-from musimate.models import User, Event, Comment
+from musimate.models import User, Event, Comment, Order
 from flask_bcrypt import generate_password_hash
+from datetime import datetime
 
 # Recreate database
 app = create_app()
@@ -19,11 +20,21 @@ user_1 = User(name=user1_name, password_hash=user1_password, email=user1_email, 
 db.session.add(user_1)
 db.session.commit()
 
+user2_name = 'person'
+user2_password = generate_password_hash('abcd')
+user2_email = 'person@email.com'
+user2_contact_number = '6789012345'
+user2_address = '89 Side Rd'
+user_2 = User(name=user2_name, password_hash=user2_password, email=user2_email, contact_number=user2_contact_number, address=user2_address)
+db.session.add(user_2)
+db.session.commit()
+
 event1_name = 'Omatone Concert'
 event1_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 event1_genre = 'Pop'
 event1_location = 'Brisbane'
-event1_date = '19/09/2023 5:00pm'
+event1_string_date = '19/09/2023 5:00 PM'
+event1_date = datetime.strptime(event1_string_date, '%d/%m/%Y %I:%M %p')
 event1_image = '/static/image/otamatone.jpg'
 event1_price = 15
 event1_user_id = user_1.id
@@ -35,7 +46,8 @@ event2_name = 'Classical Concert'
 event2_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 event2_genre = 'Classical'
 event2_location = 'Gold Coast'
-event2_date = '20/09/2023 5:00pm'
+event2_string_date = '20/09/2023 4:00 PM'
+event2_date = datetime.strptime(event2_string_date, '%d/%m/%Y %I:%M %p')
 event2_image = '/static/image/event2.jpg'
 event2_price = 19.99
 event2_user_id = user_1.id
@@ -47,7 +59,8 @@ event3_name = 'Heavy Metal Concert'
 event3_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 event3_genre = 'Metal'
 event3_location = 'Brisbane'
-event3_date = '20/9/2023 5:00pm'
+event3_string_date = '20/9/2023 8:00 PM'
+event3_date = datetime.strptime(event3_string_date, '%d/%m/%Y %I:%M %p')
 event3_image = '/static/image/event3.jpg'
 event3_price = 10.5
 event3_user_id = user_1.id
@@ -74,6 +87,27 @@ comment3_user_id = user_1.id
 comment3_event_id = event_3.id
 comment_3 = Comment(text=comment3_text, user_id=comment3_user_id, event_id=comment3_event_id)
 db.session.add(comment_3)
+db.session.commit()
+
+order1_quantity = 5
+order1_user_id = user_1.id
+order1_event_id = event_1.id
+order_1 = Order(quantity=order1_quantity, user_id=order1_user_id, event_id=order1_event_id)
+db.session.add(order_1)
+db.session.commit()
+
+order2_quantity = 2
+order2_user_id = user_1.id
+order2_event_id = event_2.id
+order_2 = Order(quantity=order2_quantity, user_id=order2_user_id, event_id=order2_event_id)
+db.session.add(order_2)
+db.session.commit()
+
+order3_quantity = 15
+order3_user_id = user_2.id
+order3_event_id = event_2.id
+order_3 = Order(quantity=order3_quantity, user_id=order3_user_id, event_id=order3_event_id)
+db.session.add(order_3)
 db.session.commit()
 
 quit()

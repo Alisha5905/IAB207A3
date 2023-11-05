@@ -31,9 +31,9 @@ class Event(db.Model):
     genre = db.Column(db.String(40))
     location = db.Column(db.String(200))
     # possibly make this a date time format
-    date = db.Column(db.String(200))
+    date = db.Column(db.DateTime)
     image = db.Column(db.String(400))
-    price = db.Column(db.Integer)
+    price = db.Column(db.Float)
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	# relation to call event.comments and comment.event

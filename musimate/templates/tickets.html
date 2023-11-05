@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!-- List of bookings -->
+<h2 style="margin-left: 20px;">My Tickets:</h2>
+
+<div class="break">
+</div>
+<div class="padding">
+   <div class="row">
+      {% if num_tickets == 0 %}
+      <div class="d-flex p-4 justify-content-center">
+         <h4>No Tickets</h4>
+      </div>
+      {% else %}
+      <div class="card-group">
+         {% for ticket in tickets %}
+         <div class="col-lg-4 col-md-4 col-sm-6">
+            <a href="{{ url_for('event.show', id=ticket.event.id) }}" style="text-decoration:none">
+               <div class="card border-light" style="max-width: 20rem; ">
+                  <img class="card-img-top" src="{{ ticket.event.image }}" alt="Card image" style="width:100%">
+                  <div class="card-body">
+                     <h5 class="card-title">{{ ticket.event.name }}</h5>
+                  </div>
+                  <div class="card-header d-flex justify-content-between">
+                     <div style="font-size: medium;">
+                        Booking: {{ ticket.order_id}}E{{ ticket.event_id}}Q{{ ticket.quantity }}#{{ ticket.booked_at.toordinal() }}
+                     </div>
+                  </div>
+                  <div class="card-header d-flex justify-content-between">
+                     <div style="font-size: small;">
+                        Tickets x {{ ticket.quantity }}
+                     </div>
+                     <div style="font-size:x-small">
+                        {{ ticket.booked_at.strftime("%-d/%-m/%y %-I:%M %p") }}
+                     </div>
+                  </div>
+
+               </div>
+            </a>
+         </div>
+         {% endfor %}
+      </div>
+      {% endif %}
+   </div>
+</div>
+
+{% endblock %}
