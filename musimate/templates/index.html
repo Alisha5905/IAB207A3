@@ -29,7 +29,7 @@
                               <div>
                                  <p class="cardDetails" id="status"
                                     style="font-size: small; margin-left:3px; margin-bottom:5px; color: blue;">
-                                    Sold Out</p> <!-- change to "{ event.status }"-->
+                                    {{ event.status }}</p>
                               </div>
                            </div>
                         </row>
@@ -37,20 +37,10 @@
                         <row class="row">
                            <div class="d-flex justify-content-left">
                               <div>
-                                 <img src="static/svg/artist.svg" class="cardIcons">
-                              </div>
-                              <div>
-                                 <p class="cardDetails" id="artist" style="margin:auto;">Ota & Matone</p> <!-- change to "{ event.artist }"-->
-                              </div>
-                           </div>
-                        </row>
-                        <row class="row">
-                           <div class="d-flex justify-content-left">
-                              <div>
                                  <img src="static/svg/location.svg" class="cardIcons">
                               </div>
                               <div>
-                                 <p class="cardDetails" id="location" style="margin:auto;">Brisbane</p> <!-- change to "{ event.location }"-->
+                                 <p class="cardDetails" id="location" style="margin:auto;">{{ event.location }}</p>
                               </div>
                            </div>
                         </row>
@@ -60,7 +50,7 @@
                                  <img src="static/svg/date.svg" class="cardIcons">
                               </div>
                               <div>
-                                 <p class="cardDetails" id="startDate">19 September 2023 5:00pm-8:00pm</p> <!-- change to "{ event.date }"-->
+                                 <p class="cardDetails" id="Date">{{ event.date }}</p>
                               </div>
                            </div>
                         </row>

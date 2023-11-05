@@ -11,11 +11,12 @@ eventbp = Blueprint('event', __name__, url_prefix='/events')
 
 @eventbp.route('/<id>')
 def show(id):
+    genres = db.session.scalars(db.select(Event.genre.distinct())).all()
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     # create the comment form
     comment_form = CommentForm()
     order_form = OrderForm()
-    return render_template('events/show.html', event=event, comment_form=comment_form, order_form = order_form)
+    return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -54,7 +55,7 @@ def check_upload_file(form):
 @eventbp.route('/<id>/comment', methods=['GET', 'POST'])  
 @login_required
 def comment(id):  
-    form = CommentForm()  
+    form = CommentForm()
     #get the event object associated to the page and the comment
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     if form.validate_on_submit():  

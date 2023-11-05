@@ -88,30 +88,31 @@
       </nav>
        <!-- Event search bar -->
        <div class="searchBar">
-         <form>
+         <form action="{{url_for('main.search')}}" >
            <div class="d-flex justify-content-between">
              <div class="input-group" style="justify-content: center;">
                <div>
                  <label for="Genre" style="color:white; font-size:small; font-weight: bold;">Genre </label>
-                 <select class="searchInput" id="Genre">
-                   <option value="pop">Pop</option>
-                   <option value="classical">Classical</option>
-                   <option value="rock">Rock</option>
-                   <option value="jazz">Jazz</option>
+                 <select class="searchInput" name="genre" id="Genre">
+                  <option value="{{ selected_genre }}">{{ selected_genre }}</option>
+                  <option value="All">All</option>
+                  {% for genre in genres %}
+                   <option value="{{ genre }}">{{ genre }}</option>
+                   {% endfor %}
                  </select>
                </div>
                   <div>
                      <label for="Location"
                         style="color:white; font-size:small; font-weight: bold;">Location</label>
-                     <input class="searchInput" type="text" id="Location" placeholder="Brisbane">
+                     <input class="searchInput" type="text" name="location" id="Location" placeholder="Place" value="{{ selected_location }}">
                   </div>
                   <div>
                      <label for="Date" style="color:white; font-size:small; font-weight: bold;">Date </label>
-                     <input class="searchInput" type="text" id="Date" placeholder="dd/mm/yyyy">
+                     <input class="searchInput" type="text" name="date" id="Date" placeholder="dd/mm/yyyy" value="{{ selected_date }}">
                   </div>
                   <div>
                      <div class="d-flex justify-content-center align-items-center" style=" height:100%">
-                        <input class="searchSubmit" type="submit" value="Search">
+                        <button class="searchSubmit" type="submit">Search</button>
                      </div>
                   </div>
                </div>
