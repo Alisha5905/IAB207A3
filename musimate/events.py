@@ -21,6 +21,7 @@ def show(id):
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
+  genres = db.session.scalars(db.select(Event.genre.distinct())).all()
   form = EventForm()
   if form.validate_on_submit():
     #call the function that checks and returns image
@@ -35,7 +36,7 @@ def create():
     flash('Successfully created new event', 'success')
     #Always end with redirect when form is valid
     return redirect(url_for('event.create'))
-  return render_template('events/create.html', form=form)
+  return render_template('events/create.html', form=form, genres=genres, selected_genre='Select')
 
 def check_upload_file(form):
   #get file data from form  

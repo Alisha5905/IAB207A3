@@ -104,6 +104,10 @@
     background-position: right;
 }
 
+#Genre.searchInput {
+    appearance: none;
+}
+
 #Date.searchInput {
     background-image: url("../svg/date.svg");
     background-repeat: no-repeat;
