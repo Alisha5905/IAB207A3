@@ -74,12 +74,16 @@ def comment(id):
 @eventbp.route('/<id>/order',methods = ['GET','POST'])
 @login_required
 def order(id):
-   form = OrderForm()
-   event = db.session.scalar(db.select(Event).where(Event.id==id))
-   if form.validate_on_submit():
-      order = Order(quantity = form.quantity.data, event=event,
+  form = OrderForm()
+  event = db.session.scalar(db.select(Event).where(Event.id==id))
+  if form.validate_on_submit():
+    order = Order(quantity = form.quantity.data, event=event,
                     user=current_user)
-      db.session.add(order)
-      db.session.commit
-      flash('Your order has been placed\n'+f'Your order number is:{order.order_id}', 'success')
-      return redirect(url_for('event.show',id=id))
+    db.session.add(order)
+    db.session.commit()
+    flash('Your order has been placed', 'success')
+    print("form okay")
+    return redirect(url_for('event.show',id=id))
+  else:
+      print("not okay")
+  return redirect(url_for('event.show',id=id))
