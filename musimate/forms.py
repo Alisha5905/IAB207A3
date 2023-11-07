@@ -55,11 +55,7 @@ class CommentForm(FlaskForm):
 # User order
 class OrderForm(FlaskForm):
     quantity = IntegerField("Order",
-<<<<<<< HEAD
                             [InputRequired(), NumberRange(min=1, max=10,
                             message="please entre a quantity between 1 and 10")])
-=======
-                            validators=[InputRequired(), NumberRange(min=1, max=10,
-                                                                     message="please enter a quantity between 1 and 10")])
->>>>>>> b549d138dc09c08cd889e7f91e1aa7bc292b1199
+
     submit = SubmitField("Place Order")
