@@ -37,8 +37,10 @@ event1_string_date = '19/09/2023 5:00 PM'
 event1_date = datetime.strptime(event1_string_date, '%d/%m/%Y %I:%M %p')
 event1_image = '/static/image/otamatone.jpg'
 event1_price = 15
+event1_quantity = 30
+event1_quantitySold = 0
 event1_user_id = user_1.id
-event_1 = Event(name=event1_name, description=event1_description, genre=event1_genre, location=event1_location, date=event1_date, image=event1_image, price=event1_price, user_id=event1_user_id)
+event_1 = Event(name=event1_name, description=event1_description, genre=event1_genre, location=event1_location, date=event1_date, image=event1_image, price=event1_price, quantity=event1_quantity, quantitySold = event1_quantitySold, user_id=event1_user_id)
 db.session.add(event_1)
 db.session.commit()
 
@@ -50,8 +52,10 @@ event2_string_date = '20/09/2023 4:00 PM'
 event2_date = datetime.strptime(event2_string_date, '%d/%m/%Y %I:%M %p')
 event2_image = '/static/image/event2.jpg'
 event2_price = 19.99
+event2_quantity = 50
+event2_quantitySold = 0
 event2_user_id = user_1.id
-event_2 = Event(name=event2_name, description=event2_description, genre=event2_genre, location=event2_location, date=event2_date, image=event2_image, price=event2_price, user_id=event2_user_id)
+event_2 = Event(name=event2_name, description=event2_description, genre=event2_genre, location=event2_location, date=event2_date, image=event2_image, price=event2_price, quantity=event2_quantity, quantitySold = event2_quantitySold, user_id=event2_user_id)
 db.session.add(event_2)
 db.session.commit()
 
@@ -63,8 +67,10 @@ event3_string_date = '20/9/2023 8:00 PM'
 event3_date = datetime.strptime(event3_string_date, '%d/%m/%Y %I:%M %p')
 event3_image = '/static/image/event3.jpg'
 event3_price = 10.5
+event3_quantity = 25
+event3_quantitySold = 0
 event3_user_id = user_1.id
-event_3 = Event(name=event3_name, description=event3_description, genre=event3_genre, location=event3_location, date=event3_date, image=event3_image, price=event3_price, user_id=event3_user_id)
+event_3 = Event(name=event3_name, description=event3_description, genre=event3_genre, location=event3_location, date=event3_date, image=event3_image, price=event3_price, quantity=event3_quantity, quantitySold = event3_quantitySold, user_id=event3_user_id)
 db.session.add(event_3)
 db.session.commit()
 
