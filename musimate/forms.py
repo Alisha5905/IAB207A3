@@ -9,8 +9,8 @@ ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[InputRequired()])
     description = TextAreaField('Description', validators=[InputRequired()])
-    location = StringField('Location', validators=[InputRequired()])
     genre = StringField('Genre', validators=[InputRequired()])
+    location = StringField('Location', validators=[InputRequired()])
     date = DateTimeField("Date", validators=[InputRequired(
     )], format='%d/%m/%Y %I:%M %p', description="Use format: dd/mm/yyyy hh:mm am/pm")
     image = FileField('Event Image', validators=[FileRequired(message='Image cannot be empty'), FileAllowed(
@@ -20,6 +20,22 @@ class EventForm(FlaskForm):
     price = DecimalField('Ticket Price ($)', validators=[
                          InputRequired()], render_kw={"placeholder": "00.00"})
     submit = SubmitField("Create")
+
+# Create new event
+class EditEventForm(FlaskForm):
+    name = StringField('Event Name', validators=[InputRequired()])
+    description = TextAreaField('Description', validators=[InputRequired()])
+    genre = StringField('Genre', validators=[InputRequired()])
+    location = StringField('Location', validators=[InputRequired()])
+    date = DateTimeField("Date", validators=[InputRequired(
+    )], format='%d/%m/%Y %I:%M %p', description="Use format: dd/mm/yyyy hh:mm am/pm")
+    image = FileField('New Event Image (Optional)', validators=[FileAllowed(
+        ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
+    quantity = IntegerField('Quantity of Tickets Available', validators=[InputRequired(
+    ), NumberRange(min=10, max=99999999999, message="please enter a quantity greater than 10")])
+    price = DecimalField('Ticket Price ($)', validators=[
+                         InputRequired()], render_kw={"placeholder": "00.00"})
+    submit = SubmitField("Save Changes")
 
 # User login
 class LoginForm(FlaskForm):

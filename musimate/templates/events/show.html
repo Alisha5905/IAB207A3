@@ -90,6 +90,11 @@
                Tickets</a>
             {% endif %}
             {% endif %}
+            <!-- Button to edit event -->
+            {% if current_user == event.user %}
+            <a class="breakButton" href="{{ url_for('event.edit', id=event.id) }}" style="text-decoration: none; ">Edit
+               Event</a>
+            {% endif %}
             <!-- Purchase ticket Popup -->
             <div id="buyTicketPopup" class="popup">
                <div class="d-flex justify-content-center">

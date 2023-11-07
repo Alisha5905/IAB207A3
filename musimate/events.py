@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Event, Comment, Order
-from .forms import EventForm, CommentForm, OrderForm
+from .forms import EventForm, EditEventForm, CommentForm, OrderForm
 from . import db
 import os
 from datetime import datetime
@@ -45,8 +45,52 @@ def create():
         db.session.commit()
         flash('Successfully created new event', 'success')
         # Always end with redirect when form is valid
-        return redirect(url_for('event.create'))
-    return render_template('events/create.html', form=form, genres=genres, selected_genre='Select')
+        return redirect(url_for('main.index'))
+    return render_template('events/create.html', form=form, genres=genres, selected_genre='Select', heading="Create Event")
+
+
+@eventbp.route('/edit/<id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    genres = db.session.scalars(db.select(Event.genre.distinct())).all()
+    event = db.session.scalar(db.select(Event).where(Event.id == id))
+    if (event.user != current_user):
+        flash('You are not the owner of this event', 'error')
+        return redirect(url_for('event.show', id=id))
+    else:
+        form = EditEventForm()
+        if (request.method == 'GET'):
+            # Prepare form with default values
+            form.name.default = event.name
+            form.description.default = event.description
+            form.genre.default = event.genre
+            form.location.default = event.location
+            form.date.default = event.date
+            form.quantity.default = event.quantity
+            form.price.default = event.price
+            form.process()
+
+        if form.validate_on_submit():
+            # call the function that checks and returns image
+            if (form.image.data is not None):
+                db_file_path = check_upload_file(form)
+                event.image = db_file_path
+            # update the event data
+            event.name = form.name.data
+            event.description = form.description.data
+            event.genre = form.genre.data
+            event.location = form.location.data
+            event.date = form.date.data
+            event.quantity = form.quantity.data
+            event.price = form.price.data
+            # add the object to the db session
+            db.session.add(event)
+            # commit to the database
+            db.session.commit()
+            flash('Successfully edited event', 'success')
+            # Always end with redirect when form is valid
+            return redirect(url_for('event.show', id=id))
+    return render_template('events/create.html', form=form, genres=genres, selected_genre='Select', heading='Edit Event')
 
 
 def check_upload_file(form):
