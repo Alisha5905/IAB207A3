@@ -34,7 +34,7 @@ class Event(db.Model):
     date = db.Column(db.DateTime)
     image = db.Column(db.String(400))
     quantity = db.Column(db.Integer)
-    quantitySold = db.Column(db.Integer)
+    quantitySold = db.Column(db.Integer, default=0)
     price = db.Column(db.Float)
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

@@ -270,7 +270,13 @@
   <div class="break">
      <div class="d-flex justify-content-between">
         Comments
+
+        <!-- Button to make comment -->
+        {% if current_user.is_authenticated %}
         <button class="breakButton" id="comment">Add Comment</button>
+         {% else %}
+        <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; " >Login to Comment</a>
+         {% endif %}
 
         <!-- Comment popup to post a comment -->
         <div id="commentPopup" class="popup">
