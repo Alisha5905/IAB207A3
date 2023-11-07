@@ -8,17 +8,17 @@ ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 # Create new event
 class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[InputRequired()])
-    description = TextAreaField('Description',
-                                validators=[InputRequired()])
+    description = TextAreaField('Description', validators=[InputRequired()])
     location = StringField('Location', validators=[InputRequired()])
     genre = StringField('Genre', validators=[InputRequired()])
-    # possibly make this a date time input
-    date = DateTimeField("Date", validators=[InputRequired()], format='%d/%m/%y %I:%M %p', description="Use format: dd/mm/yy hh:mm am/pm")
-    image = FileField('Event Image', validators=[
-        FileRequired(message='Image cannot be empty'),
-        FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
-    quantity = IntegerField('Quantity of Tickets Available', validators=[InputRequired(), NumberRange(min=10, max=99999999999, message="please enter a quantity greater than 10")])
-    price = DecimalField('Ticket Price ($)', validators=[InputRequired()], render_kw={"placeholder": "00.00"})
+    date = DateTimeField("Date", validators=[InputRequired(
+    )], format='%d/%m/%Y %I:%M %p', description="Use format: dd/mm/yyyy hh:mm am/pm")
+    image = FileField('Event Image', validators=[FileRequired(message='Image cannot be empty'), FileAllowed(
+        ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
+    quantity = IntegerField('Quantity of Tickets Available', validators=[InputRequired(
+    ), NumberRange(min=10, max=99999999999, message="please enter a quantity greater than 10")])
+    price = DecimalField('Ticket Price ($)', validators=[
+                         InputRequired()], render_kw={"placeholder": "00.00"})
     submit = SubmitField("Create")
 
 # User login
@@ -54,8 +54,6 @@ class CommentForm(FlaskForm):
 
 # User order
 class OrderForm(FlaskForm):
-    quantity = IntegerField("Order",
-                            [InputRequired(), NumberRange(min=1, max=10,
-                            message="please entre a quantity between 1 and 10")])
-
+    quantity = IntegerField("Order", [InputRequired(), NumberRange(
+        min=1, max=10, message="please entre a quantity between 1 and 10")])
     submit = SubmitField("Place Order")
