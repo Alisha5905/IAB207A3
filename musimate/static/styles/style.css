@@ -220,15 +220,16 @@ input[type=file] {
     width: 100%;
     border-radius: 11px;
     border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
+    display: block;
+    padding: 10px 12px;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background-color: rgba(226, 226, 226);
     background-image: url("../svg/cloud.svg");
-    background-position-x: center;
+    background-position: center right 10px;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 20px 20px;
+    text-indent: 12px;
 }
 
 #ticket {
