@@ -96,6 +96,7 @@ order1_quantity = 5
 order1_user_id = user_1.id
 order1_event_id = event_1.id
 order_1 = Order(quantity=order1_quantity, user_id=order1_user_id, event_id=order1_event_id)
+event_1.quantitySold += order1_quantity
 db.session.add(order_1)
 db.session.commit()
 
@@ -103,6 +104,7 @@ order2_quantity = 2
 order2_user_id = user_1.id
 order2_event_id = event_2.id
 order_2 = Order(quantity=order2_quantity, user_id=order2_user_id, event_id=order2_event_id)
+event_2.quantitySold += order2_quantity
 db.session.add(order_2)
 db.session.commit()
 
@@ -110,6 +112,7 @@ order3_quantity = 15
 order3_user_id = user_2.id
 order3_event_id = event_2.id
 order_3 = Order(quantity=order3_quantity, user_id=order3_user_id, event_id=order3_event_id)
+event_2.quantitySold += order3_quantity
 db.session.add(order_3)
 db.session.commit()
 
