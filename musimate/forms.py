@@ -12,7 +12,7 @@ class EventForm(FlaskForm):
     location = StringField('Location', validators=[InputRequired()])
     genre = StringField('Genre', validators=[InputRequired()])
     date = DateTimeField("Date", validators=[InputRequired(
-    )], format='%d/%m/%y %I:%M %p', description="Use format: dd/mm/yy hh:mm am/pm")
+    )], format='%d/%m/%Y %I:%M %p', description="Use format: dd/mm/yyyy hh:mm am/pm")
     image = FileField('Event Image', validators=[FileRequired(message='Image cannot be empty'), FileAllowed(
         ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
     quantity = IntegerField('Quantity of Tickets Available', validators=[InputRequired(
