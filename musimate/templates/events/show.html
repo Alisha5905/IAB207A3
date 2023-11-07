@@ -82,7 +82,7 @@
       <div>
          <div class="d-flex justify-content-end align-items-center" style=" height:100%">
             <!-- Button to look at buying tickets -->
-            {% if (event.status != 'Sold Out') and (event.status != 'Inactive') %}
+            {% if (event.status != 'Sold Out') and (event.status != 'Inactive') and (event.status != 'Cancelled') %}
             {% if current_user.is_authenticated %}
             <button class="breakButton" id="buyTicket">Buy Tickets</button>
             {% else %}
