@@ -82,9 +82,7 @@ def order(id):
                     user=current_user)
     db.session.add(order)
     db.session.commit()
-    flash('Your order has been placed', 'success')
-    print("form okay")
+    flash('Your order has been placed\n'+f'Your order number is: {order.order_id}', 'success')
     return redirect(url_for('event.show',id=id))
   else:
-      print("not okay")
-  return redirect(url_for('event.show',id=id))
+    return redirect(url_for('event.show',id=id))
