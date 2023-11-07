@@ -4,14 +4,22 @@
 
 {% block content %}
 
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-md-12">
-        <h1>Create Event</h1>
-        <p>Enter a country that you will help clients travel to.</p>
-        {{ render_form(form) }}
-      </div>
-    </div>
+<div class="row">
+  <div class="d-flex justify-content-left">
+     <div>
+        <a class="logo" role="button" href="{{ url_for('main.index') }}">
+           <button id="return" style="margin-top: 10px;">Return</button>
+        </a>
+     </div>
+  </div>
+</div> 
+  <div class="col-md-12" style="padding-left:30px; padding-right:30px">
+    <h1 style="padding-top:10px">Create Event</h1>
+  </div>
+    <div class="break"></div>
+    <div class="col-md-12" style="padding-left:30px; padding-right:30px">
+    
+    {{ render_form(form) }}
   </div>
 
 {% endblock %}

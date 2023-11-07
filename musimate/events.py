@@ -28,7 +28,7 @@ def create():
     db_file_path = check_upload_file(form)
     event = Event(name=form.name.data,description=form.description.data, 
     genre=form.genre.data, location=form.location.data, date = form.date.data,
-    image=db_file_path, price=form.price.data, user=current_user)
+    image=db_file_path, quantity=form.quantity.data, quantitySold='0', price=form.price.data, user=current_user)
     # add the object to the db session
     db.session.add(event)
     # commit to the database

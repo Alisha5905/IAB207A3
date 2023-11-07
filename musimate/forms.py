@@ -17,7 +17,8 @@ class EventForm(FlaskForm):
     image = FileField('Event Image', validators=[
         FileRequired(message='Image cannot be empty'),
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
-    price = DecimalField('Price ($)', validators=[InputRequired()], render_kw={"placeholder": "00.00"})
+    quantity = IntegerField('Quantity of Tickets Available', validators=[InputRequired(), NumberRange(min=10, max=99999999999, message="please enter a quantity greater than 10")])
+    price = DecimalField('Ticket Price ($)', validators=[InputRequired()], render_kw={"placeholder": "00.00"})
     submit = SubmitField("Create")
 
 # User login
@@ -54,6 +55,11 @@ class CommentForm(FlaskForm):
 # User order
 class OrderForm(FlaskForm):
     quantity = IntegerField("Order",
+<<<<<<< HEAD
                             [InputRequired(), NumberRange(min=1, max=10,
                             message="please entre a quantity between 1 and 10")])
+=======
+                            validators=[InputRequired(), NumberRange(min=1, max=10,
+                                                                     message="please enter a quantity between 1 and 10")])
+>>>>>>> b549d138dc09c08cd889e7f91e1aa7bc292b1199
     submit = SubmitField("Place Order")

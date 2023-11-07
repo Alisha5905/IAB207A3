@@ -33,6 +33,8 @@ class Event(db.Model):
     # possibly make this a date time format
     date = db.Column(db.DateTime)
     image = db.Column(db.String(400))
+    quantity = db.Column(db.Integer)
+    quantitySold = db.Column(db.Integer)
     price = db.Column(db.Float)
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
