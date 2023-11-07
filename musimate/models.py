@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.String(10), default='Open')
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
     genre = db.Column(db.String(40))

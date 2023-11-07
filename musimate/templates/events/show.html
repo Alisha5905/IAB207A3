@@ -20,8 +20,8 @@
       </div>  
     </div>  
   -->
-    <!-- Event --> 
-    <!--
+<!-- Event -->
+<!--
     <div class="row">  
       <div class="col-md-12">  
         <div class="card my-3">  
@@ -41,8 +41,8 @@
     </div>
     <hr>
   -->
-    <!-- Comments -->  
-    <!--
+<!-- Comments -->
+<!--
     <div class="row">  
       <div class="col-md-12">  
         <h2>Comments</h1>  
@@ -55,8 +55,8 @@
       {% for comment in event.comments %}
       <div class="col-md-12">  
       -->
-        <!-- caused a 500 error when I tried to open event page with -> ("%-d %b %y at %-I:%M %p")-->
-        <!--
+<!-- caused a 500 error when I tried to open event page with -> ("%-d %b %y at %-I:%M %p")-->
+<!--
         <b>{{ comment.user.name }} <span class="ml-2 text-muted">{{ comment.created_at.strftime("%d/%m/%Y at %H:%M") }}</span></b>
         
         <p>{{ comment.text }}</p>  
@@ -67,74 +67,76 @@
 -->
 
 <div class="main">
-  <div class="row">
-     <div class="d-flex justify-content-left">
-        <div>
-           <a class="logo" role="button" href="{{ url_for('main.index') }}">
-              <button id="return" style="margin-top: 10px;">Return</button>
-           </a>
-        </div>
-     </div>
-  </div> 
-  <!-- Event Title -->
-  <h1 style="margin-left: 30px;">{{ event.name }}</h1>
-  <div class="break">
-     <div>
-        <div class="d-flex justify-content-end align-items-center" style=" height:100%">
-           <!-- Button to look at buying tickets -->
-           {% if current_user.is_authenticated %}
-           <button class="breakButton" id="buyTicket">Buy Tickets</button>
+   <div class="row">
+      <div class="d-flex justify-content-left">
+         <div>
+            <a class="logo" role="button" href="{{ url_for('main.index') }}">
+               <button id="return" style="margin-top: 10px;">Return</button>
+            </a>
+         </div>
+      </div>
+   </div>
+   <!-- Event Title -->
+   <h1 style="margin-left: 30px;">{{ event.name }}</h1>
+   <div class="break">
+      <div>
+         <div class="d-flex justify-content-end align-items-center" style=" height:100%">
+            <!-- Button to look at buying tickets -->
+            {% if (event.status != 'Sold Out') and (event.status != 'Inactive') %}
+            {% if current_user.is_authenticated %}
+            <button class="breakButton" id="buyTicket">Buy Tickets</button>
             {% else %}
-           <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; " >Login to Buy Tickets</a>
+            <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; ">Login to Buy
+               Tickets</a>
             {% endif %}
-           <!-- Purchase ticket Popup -->
-           <div id="buyTicketPopup" class="popup">
-              <div class="d-flex justify-content-center">
-                 <div class="col-sm-12 col-md-10 col-lg-8 align-self-center">
-                    <div class="popup-content">
-                       <row class="row">
-                          <div class="d-flex justify-content-left">
-                             <div>
-                                <button id="closePopup">Return</button>
-                             </div>
-                          </div>
-                       </row>
-                       <h2>
-                          {{event.name}}
-                       </h2>
-                       <row class="row">
-                          <div class="d-flex justify-content-left">
-                             <div>
-                                <img src="../../static/svg/location.svg">
-                             </div>
-                             <div>
-                                <p class="eventDetails" id="location" style="margin:auto;">{{event.location}}</p>
-                             </div>
-                          </div>
-                       </row>
-                       <row class="row">
-                          <div class="d-flex justify-content-left">
-                             <div>
-                                <img src="../../static/svg/date.svg">
-                             </div>
-                             <div>
-                                <p class="eventDetails" id="startDate">{{event.date}}</p>
-                             </div>
-                          </div>
-                       </row>
+            {% endif %}
+            <!-- Purchase ticket Popup -->
+            <div id="buyTicketPopup" class="popup">
+               <div class="d-flex justify-content-center">
+                  <div class="col-sm-12 col-md-10 col-lg-8 align-self-center">
+                     <div class="popup-content">
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <button id="closePopup">Return</button>
+                              </div>
+                           </div>
+                        </row>
+                        <h2>
+                           {{event.name}}
+                        </h2>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="../../static/svg/location.svg">
+                              </div>
+                              <div>
+                                 <p class="eventDetails" id="location" style="margin:auto;">{{event.location}}</p>
+                              </div>
+                           </div>
+                        </row>
+                        <row class="row">
+                           <div class="d-flex justify-content-left">
+                              <div>
+                                 <img src="../../static/svg/date.svg">
+                              </div>
+                              <div>
+                                 <p class="eventDetails" id="startDate">{{event.date}}</p>
+                              </div>
+                           </div>
+                        </row>
 
 
                         <div class="row">
-                           <div class="d-flex justify-content-around"
-                              style="margin-top: 20px; margin-bottom: 20px;">
+                           <div class="d-flex justify-content-around" style="margin-top: 20px; margin-bottom: 20px;">
                               <div>General Admission:</div>
                               <div> ${{'{:.2f}'.format(event.price)}} </div>
-                              
+
                            </div>
                         </div>
                         <!--- order form -->
-                        <div class = "row orderForm">
-                              {{render_form(order_form,"/events/{0}/order".format(event.id))}}
+                        <div class="row orderForm">
+                           {{render_form(order_form,"/events/{0}/order".format(event.id))}}
                         </div>
                         <div class="row">
                            <div class="d-flex justify-content-left summary" style="margin-top: 10px;">
@@ -143,182 +145,178 @@
                            </div>
                         </div>
 
-                    </div>
-                 </div>
-              </div>
-           </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
 
-           <!-- Second Popup to show confirmation of purchase -->
-           <div id="confirmation" class="popup-confirm">
-              <div class="d-flex justify-content-center">
-                 <div class="col-sm-12 col-md-10 col-lg-8 align-self-center">
-                    <div class="popup-content-confirm">
-                       <div class="row">
-                          <div class="d-flex justify-content-center">
-                             <div style="font-size: larger;">Congratulations!</div>
-                          </div>
-                          <br>
-                          <div class="d-flex justify-content-center"
-                             style="margin-top: 20px; margin-bottom: 20px;">
-                             <div>Your tickets have been booked.</div>
-                          </div>
-                          <br>
-                          <div class="d-flex justify-content-around"
-                             style="margin-top: 20px; margin-bottom: 20px;">
-                             <div>Confirmation number:</div>
-                             <div> XXXXXXXXXXXX </div>
-                          </div>
-                       </div>
-                       <row class="row">
-                          <div class="d-flex justify-content-center">
-                             <div>
-                                <input type="submit" id="closePopupConfirmation" value="Return"
-                                   style="width:150px">
-                             </div>
-                          </div>
-                       </row>
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </div>
-  </div>
+            <!-- Second Popup to show confirmation of purchase -->
+            <div id="confirmation" class="popup-confirm">
+               <div class="d-flex justify-content-center">
+                  <div class="col-sm-12 col-md-10 col-lg-8 align-self-center">
+                     <div class="popup-content-confirm">
+                        <div class="row">
+                           <div class="d-flex justify-content-center">
+                              <div style="font-size: larger;">Congratulations!</div>
+                           </div>
+                           <br>
+                           <div class="d-flex justify-content-center" style="margin-top: 20px; margin-bottom: 20px;">
+                              <div>Your tickets have been booked.</div>
+                           </div>
+                           <br>
+                           <div class="d-flex justify-content-around" style="margin-top: 20px; margin-bottom: 20px;">
+                              <div>Confirmation number:</div>
+                              <div> XXXXXXXXXXXX </div>
+                           </div>
+                        </div>
+                        <row class="row">
+                           <div class="d-flex justify-content-center">
+                              <div>
+                                 <input type="submit" id="closePopupConfirmation" value="Return" style="width:150px">
+                              </div>
+                           </div>
+                        </row>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 
-  <!-- Actual event details -->
-  <div class="padding">
-     <img src="{{ event.image }}" style="width: 100%; align-self: center; margin-bottom: 10px;">
+   <!-- Actual event details -->
+   <div class="padding">
+      <img src="{{ event.image }}" style="width: 100%; align-self: center; margin-bottom: 10px;">
 
-     <!-- Status -->
-     <row class="row">
-        <div class="d-flex justify-content-left">
-           <div>
-              <img src="../../static/svg/status.svg">
-           </div>
-           <div style="margin-right: 10px; margin-left: 5px;">
-              <div class="eventDetails" id="label">Status:</div>
-           </div>
-           <div>
-              <p class="{{ currentStatus }}" id="status">{{ currentStatus }}</p>
-           </div>
-        </div>
-     </row>
+      <!-- Status -->
+      <row class="row">
+         <div class="d-flex justify-content-left">
+            <div>
+               <img src="../../static/svg/status.svg">
+            </div>
+            <div style="margin-right: 10px; margin-left: 5px;">
+               <div class="eventDetails" id="label">Status:</div>
+            </div>
+            <div>
+               <p class="{{ event.status }}" id="status">{{ event.status }}</p>
+            </div>
+         </div>
+      </row>
 
-     <!-- genre -->
-     <row class="row">
-        <div class="d-flex justify-content-left">
-           <div>
-              <img src="../../static/svg/genre.svg">
-           </div>
-           <div style="margin-right: 10px; margin-left: 5px;">
-              <div class="eventDetails" id="label">Genre:</div>
-           </div>
-           <div>
-              <p class="eventDetails" id="genre">{{event.genre}}</p>
-           </div>
-        </div>
-     </row>
+      <!-- genre -->
+      <row class="row">
+         <div class="d-flex justify-content-left">
+            <div>
+               <img src="../../static/svg/genre.svg">
+            </div>
+            <div style="margin-right: 10px; margin-left: 5px;">
+               <div class="eventDetails" id="label">Genre:</div>
+            </div>
+            <div>
+               <p class="eventDetails" id="genre">{{event.genre}}</p>
+            </div>
+         </div>
+      </row>
 
-     <!-- location -->
-     <row class="row">
-        <div class="d-flex justify-content-left">
-           <div>
-              <img src="../../static/svg/location.svg">
-           </div>
-           <div style="margin-right: 10px; margin-left: 5px;">
-              <div class="eventDetails" id="label">Location:</div>
-           </div>
-           <div>
-              <p class="eventDetails" id="location">{{event.location}}</p>
-           </div>
-        </div>
-     </row>
+      <!-- location -->
+      <row class="row">
+         <div class="d-flex justify-content-left">
+            <div>
+               <img src="../../static/svg/location.svg">
+            </div>
+            <div style="margin-right: 10px; margin-left: 5px;">
+               <div class="eventDetails" id="label">Location:</div>
+            </div>
+            <div>
+               <p class="eventDetails" id="location">{{event.location}}</p>
+            </div>
+         </div>
+      </row>
 
-     <!-- start date & time -->
-     <row class="row">
-        <div class="d-flex justify-content-left">
-           <div>
-              <img src="../../static/svg/date.svg">
-           </div>
-           <div style="margin-right: 10px; margin-left: 5px;">
-              <div class="eventDetails" id="label">Date & Time:</div>
-           </div>
-           <div>
-              <p class="eventDetails" id="startDate">{{event.date.strftime("%d %b %y at %I:%M %p")}}</p>
-           </div>
-        </div>
-     </row>
+      <!-- start date & time -->
+      <row class="row">
+         <div class="d-flex justify-content-left">
+            <div>
+               <img src="../../static/svg/date.svg">
+            </div>
+            <div style="margin-right: 10px; margin-left: 5px;">
+               <div class="eventDetails" id="label">Date & Time:</div>
+            </div>
+            <div>
+               <p class="eventDetails" id="startDate">{{event.date.strftime("%d %b %y at %I:%M %p")}}</p>
+            </div>
+         </div>
+      </row>
 
-     <!-- event description -->
-     <row class="row">
-        <div class="d-flex justify-content-left">
-           <div>
-              <img src="../../static/svg/location.svg" style="visibility: hidden;">
-           </div>
-           <div style="margin-right: 10px; margin-left: 5px;">
-              <div class="eventDetails" id="label">Event Description:</div>
-           </div>
-           <div>
-              <p class="eventDetails" id="description">{{ event.description }}</p>
-           </div>
-        </div>
-     </row>
-  </div>
+      <!-- event description -->
+      <row class="row">
+         <div class="d-flex justify-content-left">
+            <div>
+               <img src="../../static/svg/location.svg" style="visibility: hidden;">
+            </div>
+            <div style="margin-right: 10px; margin-left: 5px;">
+               <div class="eventDetails" id="label">Event Description:</div>
+            </div>
+            <div>
+               <p class="eventDetails" id="description">{{ event.description }}</p>
+            </div>
+         </div>
+      </row>
+   </div>
 
-  <!-- comment section -->
-  <div class="break">
-     <div class="d-flex justify-content-between">
-        Comments
+   <!-- comment section -->
+   <div class="break">
+      <div class="d-flex justify-content-between">
+         Comments
 
-        <!-- Button to make comment -->
-        {% if current_user.is_authenticated %}
-        <button class="breakButton" id="comment">Add Comment</button>
+         <!-- Button to make comment -->
+         {% if current_user.is_authenticated %}
+         <button class="breakButton" id="comment">Add Comment</button>
          {% else %}
-        <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; " >Login to Comment</a>
+         <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; ">Login to Comment</a>
          {% endif %}
 
-        <!-- Comment popup to post a comment -->
-        <div id="commentPopup" class="popup">
-           <div class="d-flex justify-content-center">
-              <div class="col-sm-12 col-md-10 col-lg-8 align-self-center">
-                 <div class="popup-content">
-                    <row class="row">
-                       <div class="d-flex justify-content-left">
-                          <div>
-                             <button id="closePopupComment">Return</button>
-                          </div>
-                       </div>
-                    </row>
-                    <!--<form>-->
-                       <div class="row createEvent">
-                          {{ render_form(comment_form,"/events/{0}/comment".format(event.id)) }}
-                          <!--                          <textarea class="createEvent" id="commentBox"
+         <!-- Comment popup to post a comment -->
+         <div id="commentPopup" class="popup">
+            <div class="d-flex justify-content-center">
+               <div class="col-sm-12 col-md-10 col-lg-8 align-self-center">
+                  <div class="popup-content">
+                     <row class="row">
+                        <div class="d-flex justify-content-left">
+                           <div>
+                              <button id="closePopupComment">Return</button>
+                           </div>
+                        </div>
+                     </row>
+                     <!--<form>-->
+                     <div class="row createEvent">
+                        {{ render_form(comment_form,"/events/{0}/comment".format(event.id)) }}
+                        <!--                          <textarea class="createEvent" id="commentBox"
                              style="margin-bottom: 20px; height:100px;"></textarea>
                           <br>
                           <input id="postComment" type="submit" value="Post Comment"> -->
-                       </div>
-                      <!--</form> -->
-                 </div>
-              </div>
-           </div>
-        </div>
-     </div>
-  </div>
+                     </div>
+                     <!--</form> -->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 
-  <!-- user comments -->
-  <div class="padding">
-    {% for comment in event.comments %}
-        <row class="row">
-           <div class="commentBox">
-              <div style="font-weight:bold">{{ comment.user.name }}</div>
-              <div style="margin-left:10px;">{{ comment.text }}</div>
-              <div class="d-flex justify-content-end" style="font-size: x-small;">{{ comment.created_at.strftime("%d %b %y at %I:%M %p") }}</div>
-           </div>
-        </row>
-      {% endfor %} 
-  </div>
+   <!-- user comments -->
+   <div class="padding">
+      {% for comment in event.comments %}
+      <row class="row">
+         <div class="commentBox">
+            <div style="font-weight:bold">{{ comment.user.name }}</div>
+            <div style="margin-left:10px;">{{ comment.text }}</div>
+            <div class="d-flex justify-content-end" style="font-size: x-small;">{{ comment.created_at.strftime("%d %b %y
+               at %I:%M %p") }}</div>
+         </div>
+      </row>
+      {% endfor %}
+   </div>
 </div>
 
 {% endblock %}
-
-

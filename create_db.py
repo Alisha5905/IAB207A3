@@ -33,10 +33,10 @@ event1_name = 'Omatone Concert'
 event1_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 event1_genre = 'Pop'
 event1_location = 'Brisbane'
-event1_string_date = '19/09/2023 5:00 PM'
+event1_string_date = '28/11/2023 5:00 PM'
 event1_date = datetime.strptime(event1_string_date, '%d/%m/%Y %I:%M %p')
 event1_image = '/static/image/otamatone.jpg'
-event1_quantity = 5
+event1_quantity = 20
 event1_price = 15
 event1_user_id = user_1.id
 event_1 = Event(name=event1_name, description=event1_description, genre=event1_genre, location=event1_location, date=event1_date, image=event1_image, quantity=event1_quantity, price=event1_price, user_id=event1_user_id)
@@ -47,10 +47,10 @@ event2_name = 'Classical Concert'
 event2_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 event2_genre = 'Classical'
 event2_location = 'Gold Coast'
-event2_string_date = '20/09/2023 4:00 PM'
+event2_string_date = '24/11/2023 11:00 AM'
 event2_date = datetime.strptime(event2_string_date, '%d/%m/%Y %I:%M %p')
 event2_image = '/static/image/event2.jpg'
-event2_quantity = 20
+event2_quantity = 5
 event2_price = 19.99
 event2_user_id = user_1.id
 event_2 = Event(name=event2_name, description=event2_description, genre=event2_genre, location=event2_location, date=event2_date, image=event2_image, quantity=event2_quantity, price=event2_price, user_id=event2_user_id)
@@ -61,7 +61,7 @@ event3_name = 'Heavy Metal Concert'
 event3_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 event3_genre = 'Metal'
 event3_location = 'Brisbane'
-event3_string_date = '20/9/2023 8:00 PM'
+event3_string_date = '3/11/2023 8:00 PM'
 event3_date = datetime.strptime(event3_string_date, '%d/%m/%Y %I:%M %p')
 event3_image = '/static/image/event3.jpg'
 event3_quantity = 200
@@ -69,6 +69,21 @@ event3_price = 10.5
 event3_user_id = user_1.id
 event_3 = Event(name=event3_name, description=event3_description, genre=event3_genre, location=event3_location, date=event3_date, image=event3_image, quantity=event3_quantity, price=event3_price, user_id=event3_user_id)
 db.session.add(event_3)
+db.session.commit()
+
+event4_name = 'Rap Concert'
+event4_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+event4_genre = 'Rap'
+event4_location = 'Townsville'
+event4_string_date = '1/12/2023 2:00 PM'
+event4_date = datetime.strptime(event4_string_date, '%d/%m/%Y %I:%M %p')
+event4_image = '/static/image/event6.jpg'
+event4_quantity = 100
+event4_price = 4.99
+event4_user_id = user_2.id
+event_4 = Event(name=event4_name, description=event4_description, genre=event4_genre, location=event4_location, date=event4_date, image=event4_image, quantity=event4_quantity, price=event4_price, user_id=event4_user_id)
+event_4.status = 'Cancelled'
+db.session.add(event_4)
 db.session.commit()
 
 comment1_text = 'Looking forward to this event!'
@@ -100,7 +115,7 @@ event_1.quantitySold += order1_quantity
 db.session.add(order_1)
 db.session.commit()
 
-order2_quantity = 2
+order2_quantity = 5
 order2_user_id = user_1.id
 order2_event_id = event_2.id
 order_2 = Order(quantity=order2_quantity, user_id=order2_user_id, event_id=order2_event_id)
@@ -108,11 +123,11 @@ event_2.quantitySold += order2_quantity
 db.session.add(order_2)
 db.session.commit()
 
-order3_quantity = 15
+order3_quantity = 2
 order3_user_id = user_2.id
-order3_event_id = event_2.id
+order3_event_id = event_1.id
 order_3 = Order(quantity=order3_quantity, user_id=order3_user_id, event_id=order3_event_id)
-event_2.quantitySold += order3_quantity
+event_1.quantitySold += order3_quantity
 db.session.add(order_3)
 db.session.commit()
 

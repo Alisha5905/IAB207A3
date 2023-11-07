@@ -5,7 +5,7 @@ from . import db
 import os
 from datetime import datetime
 from werkzeug.utils import secure_filename
-#additional import:
+# additional import:
 from flask_login import login_required, current_user
 
 eventbp = Blueprint('event', __name__, url_prefix='/events')
@@ -18,17 +18,14 @@ def show(id):
     # create the comment form
     comment_form = CommentForm()
     order_form = OrderForm()
-    
-    currentStatus = None
-    # if event.status = "Cancelled":
-    #   currentStatus = "Cancelled"
-    if event.date < datetime.now():
-      currentStatus = "Inactive"
-    elif event.quantity <= event.quantitySold:
-      currentStatus = "Sold-Out"
-    else:
-      currentStatus = "Open"
-    return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form, currentStatus=currentStatus)
+
+    if event.status != 'Inactive' and event.date < datetime.now():
+        event.status = "Inactive"
+        db.session.commit()
+    elif event.status != 'Sold Out' and event.quantity <= event.quantitySold:
+        event.status = "Sold Out"
+        db.session.commit()
+    return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form)
 
 
 @eventbp.route('/create', methods=['GET', 'POST'])
