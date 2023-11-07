@@ -77,12 +77,28 @@ def comment(id):
 def order(id):
   form = OrderForm()
   event = db.session.scalar(db.select(Event).where(Event.id==id))
-  if form.validate_on_submit():
+  allocatedTix = db.session.scalar(db.select(Event.quantity).where(Event.id == id))
+  quantitySold = db.session.scalar(db.select(Event.quantitySold).where(Event.id == id))
+  availableTix = allocatedTix - quantitySold
+  if availableTix == 0:
+    flash("Event is sold out!!",'error')
+    return redirect(url_for('event.show', id=id))
+  
+  elif form.validate_on_submit():
     order = Order(quantity = form.quantity.data, event=event,
                     user=current_user)
-    db.session.add(order)
-    db.session.commit()
-    flash('Your order has been placed\n'+f'Your order number is: {order.order_id}', 'success')
-    return redirect(url_for('event.show',id=id))
+    orderQuant = form.quantity.data
+
+    if orderQuant > availableTix:
+      flash("Not enough tickets available",'error')
+      return redirect(url_for('event.show', id=id))
+    
+    elif orderQuant <= availableTix:
+      db.session.add(order)
+      event.quantitySold += orderQuant
+      db.session.commit()
+      flash('Your order has been placed\n'+f'Your order number is: {order.order_id}', 'success')
+      return redirect(url_for('event.show',id=id))
+    
   else:
     return redirect(url_for('event.show',id=id))

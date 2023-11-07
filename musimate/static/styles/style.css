@@ -40,6 +40,13 @@
     margin-right: 30px;
 }
 
+/* flash messages */
+#error{
+    background-color: lightcoral;
+}
+#success{
+    background-color: lightskyblue;
+}
 
 /* navBar */
 .logo:hover {

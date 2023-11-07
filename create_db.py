@@ -36,7 +36,7 @@ event1_location = 'Brisbane'
 event1_string_date = '19/09/2023 5:00 PM'
 event1_date = datetime.strptime(event1_string_date, '%d/%m/%Y %I:%M %p')
 event1_image = '/static/image/otamatone.jpg'
-event1_quantity = 10
+event1_quantity = 5
 event1_price = 15
 event1_user_id = user_1.id
 event_1 = Event(name=event1_name, description=event1_description, genre=event1_genre, location=event1_location, date=event1_date, image=event1_image, quantity=event1_quantity, price=event1_price, user_id=event1_user_id)
