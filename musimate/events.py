@@ -22,7 +22,7 @@ def show(id):
     currentStatus = None
     # if event.status = "Cancelled":
     #   currentStatus = "Cancelled"
-    if event.date < datetime.datetime.now():
+    if event.date < datetime.now():
       currentStatus = "Inactive"
     elif event.quantity <= event.quantitySold:
       currentStatus = "Sold-Out"
