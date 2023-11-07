@@ -178,6 +178,18 @@
          buyTicketPopup.classList.remove("show");
       }
    });
+   
+   comment.addEventListener("click", function () {
+      commentPopup.classList.add("show");
+   });
+   closePopupComment.addEventListener("click", function () {
+      commentPopup.classList.remove("show");
+   });
+   window.addEventListener("click", function (event) {
+      if (event.target == commentPopup) {
+         commentPopup.classList.remove("show");
+      }
+   });
 
    buyButton.addEventListener("click", function () {
       confirmation.classList.add("show");
@@ -193,17 +205,6 @@
       }
    });
 
-   comment.addEventListener("click", function () {
-      commentPopup.classList.add("show");
-   });
-   closePopupComment.addEventListener("click", function () {
-      commentPopup.classList.remove("show");
-   });
-   window.addEventListener("click", function (event) {
-      if (event.target == commentPopup) {
-         commentPopup.classList.remove("show");
-      }
-   });
 </script>
 
 </html>
