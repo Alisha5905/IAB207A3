@@ -27,12 +27,12 @@
                <row class="row">
                   <div class="d-flex justify-content-left">
                      <div>
-                        <p class="cardDetails" style="font-size:small; margin-bottom:5px; color: blue;"> Status:</p>
+                        <p class="cardDetails {{ event.currentStatus }}" style="font-size:small; margin-bottom:5px;"> Status:</p>
                      </div>
                      <div>
-                        <p class="cardDetails" id="status"
-                           style="font-size: small; margin-left:3px; margin-bottom:5px; color: blue;">
-                           {{ event.status }}</p>
+                        <p class="cardDetails {{ event.currentStatus }}" id="status"
+                           style="font-size: small; margin-left:3px; margin-bottom:5px;">
+                           {{ event.currentStatus }}</p>
                      </div>
                   </div>
                </row>

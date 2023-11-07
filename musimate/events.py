@@ -4,6 +4,7 @@ from .forms import EventForm, CommentForm, OrderForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
+import datetime
 #additional import:
 from flask_login import login_required, current_user
 
@@ -16,7 +17,17 @@ def show(id):
     # create the comment form
     comment_form = CommentForm()
     order_form = OrderForm()
-    return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form)
+    
+    currentStatus = None
+    # if event.status = "Cancelled":
+    #   currentStatus = "Cancelled"
+    if event.date < datetime.datetime.now():
+      currentStatus = "Inactive"
+    elif event.quantity <= event.quantitySold:
+      currentStatus = "Sold-Out"
+    else:
+      currentStatus = "Open"
+    return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form, currentStatus=currentStatus)
 
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required

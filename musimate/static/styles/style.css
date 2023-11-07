@@ -48,6 +48,23 @@
     background-color: lightskyblue;
 }
 
+/* Status Colours */
+.Open {
+    color: green
+}
+
+.Inactive {
+    color: grey
+}
+
+.Sold-Out {
+    color: blue
+}
+
+.Cancelled {
+    color: red
+}
+
 /* navBar */
 .logo:hover {
     filter: brightness(90%);

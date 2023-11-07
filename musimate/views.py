@@ -9,10 +9,33 @@ mainbp = Blueprint('main', __name__)
 
 @mainbp.route('/')
 def index():
+
     events = db.session.scalars(db.select(Event)).all()
     genres = db.session.scalars(db.select(Event.genre.distinct())).all()
     num_events = len(events)
+    for event in events: 
+        currentStatus = None
+        # if event.status = "Cancelled":
+        #   currentStatus = "Cancelled"
+        if event.date < datetime.now():
+            event.currentStatus = "Inactive"
+        elif event.quantity <= event.quantitySold:
+            event.currentStatus = "Sold-Out"
+        else:
+            event.currentStatus = "Open"
     return render_template('index.html', events=events, num_events=num_events, genres=genres, selected_genre='Select', selected_location='', selected_date='')
+
+# def eventStatus(id):
+#     currentStatus = None
+#     event = db.session.scalar(db.select(Event)).where
+#     # if event.status = "Cancelled":
+#     #   currentStatus = "Cancelled"
+#     if event.date < datetime.datetime.now():
+#       return "Inactive"
+#     elif event.quantity <= event.quantitySold:
+#       return "Sold-Out"
+#     else:
+#       return "Open"
 
 @mainbp.route('/tickets')
 @login_required
