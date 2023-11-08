@@ -30,6 +30,7 @@
   {% endif %}
 </div>
 <div class="break">
+  {% if editing %}
   <div class="d-flex justify-content-end align-items-center" style=" height:100%">
     {% if event.status == "Cancelled" %}
     <a class="breakButton" href="{{ url_for('event.change_status', id=event.id, status='Open') }}"
@@ -39,6 +40,7 @@
       style="text-decoration: none;">Cancel Event</a>
     {% endif %}
   </div>
+  {% endif %}
 </div>
 <div class="col-md-12" style="padding-left:30px; padding-right:30px">
 

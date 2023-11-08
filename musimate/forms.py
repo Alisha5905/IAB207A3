@@ -19,7 +19,7 @@ class EventForm(FlaskForm):
     ), NumberRange(min=10, max=99999999999, message="please enter a quantity greater than 10")])
     price = DecimalField('Ticket Price ($)', validators=[
                          InputRequired()], render_kw={"placeholder": "00.00"})
-    submit = SubmitField("Create")
+    submit = SubmitField("Create Event")
 
 # Create new event
 class EditEventForm(FlaskForm):
