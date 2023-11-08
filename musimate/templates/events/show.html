@@ -92,8 +92,7 @@
             {% endif %}
             <!-- Button to edit event -->
             {% if current_user == event.user %}
-            <a class="breakButton" href="{{ url_for('event.edit', id=event.id) }}" style="text-decoration: none; ">Edit
-               Event</a>
+            <a class="breakButton" href="{{ url_for('event.edit', id=event.id) }}">Edit Event</a>
             {% endif %}
             <!-- Purchase ticket Popup -->
             <div id="buyTicketPopup" class="popup">
