@@ -15,7 +15,7 @@ def index():
         if event.status != 'Inactive' and event.date < datetime.now():
             event.status = "Inactive"
             db.session.commit()
-        elif event.status != 'Sold Out' and event.quantity <= event.quantitySold:
+        elif event.status != 'Sold Out' and event.status != 'Cancelled' and event.quantity <= event.quantitySold:
             event.status = "Sold Out"
             db.session.commit()
     return render_template('index.html', events=events, num_events=len(events), genres=genres, selected_genre='Select', selected_location='', selected_date='')

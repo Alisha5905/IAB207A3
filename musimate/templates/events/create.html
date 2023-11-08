@@ -6,20 +6,43 @@
 
 <div class="row">
   <div class="d-flex justify-content-left">
-     <div>
-        <a class="logo" role="button" href="{{ url_for('main.index') }}">
-           <button id="return" style="margin-top: 10px;">Return</button>
-        </a>
-     </div>
+    <div>
+      <a class="logo" role="button" href="{{ url_for('main.index') }}">
+        <button id="return" style="margin-top: 10px;">Return</button>
+      </a>
+    </div>
   </div>
-</div> 
-  <div class="col-md-12" style="padding-left:30px; padding-right:30px">
-    <h1 style="padding-top:10px">{{ heading }}</h1>
+</div>
+<div class="col-md-12" style="padding-left:30px; padding-right:30px">
+  {% if editing %}
+  <h1 style="padding-top:10px">Edit: {{ event.name }}</h1>
+  <div class="d-flex justify-content-left">
+    <div>
+      <p class="{{ event.status }}" style="margin-bottom:5px;"> Status:</p>
+    </div>
+    <div>
+      <p class="{{ event.status }}" id="status" style="margin-left:3px; margin-bottom:5px;">
+        {{ event.status }}</p>
+    </div>
   </div>
-    <div class="break"></div>
-    <div class="col-md-12" style="padding-left:30px; padding-right:30px">
-    
-    {{ render_form(form) }}
+  {% else %}
+  <h1 style="padding-top:10px">Create Event</h1>
+  {% endif %}
+</div>
+<div class="break">
+  <div class="d-flex justify-content-end align-items-center" style=" height:100%">
+    {% if event.status == "Cancelled" %}
+    <a class="breakButton" href="{{ url_for('event.change_status', id=event.id, status='Open') }}"
+      style="text-decoration: none;">Open Event</a>
+    {% elif (event.status == "Open") or (event.status == "Sold Out") %}
+    <a class="breakButton" href="{{ url_for('event.change_status', id=event.id, status='Cancelled') }}"
+      style="text-decoration: none;">Cancel Event</a>
+    {% endif %}
   </div>
+</div>
+<div class="col-md-12" style="padding-left:30px; padding-right:30px">
+
+  {{ render_form(form) }}
+</div>
 
 {% endblock %}

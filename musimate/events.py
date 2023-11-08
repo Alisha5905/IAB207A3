@@ -22,7 +22,7 @@ def show(id):
     if event.status != 'Inactive' and event.date < datetime.now():
         event.status = "Inactive"
         db.session.commit()
-    elif event.status != 'Sold Out' and event.quantity <= event.quantitySold:
+    elif event.status != 'Sold Out' and event.status != 'Cancelled' and event.quantity <= event.quantitySold:
         event.status = "Sold Out"
         db.session.commit()
     return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form)
@@ -46,7 +46,7 @@ def create():
         flash('Successfully created new event', 'success')
         # Always end with redirect when form is valid
         return redirect(url_for('main.index'))
-    return render_template('events/create.html', form=form, genres=genres, selected_genre='Select', heading="Create Event")
+    return render_template('events/create.html', form=form, genres=genres, selected_genre='Select', editing=False)
 
 
 @eventbp.route('/edit/<id>', methods=['GET', 'POST'])
@@ -90,7 +90,7 @@ def edit(id):
             flash('Successfully edited event', 'success')
             # Always end with redirect when form is valid
             return redirect(url_for('event.show', id=id))
-    return render_template('events/create.html', form=form, genres=genres, selected_genre='Select', heading='Edit Event')
+    return render_template('events/create.html', form=form, event=event, genres=genres, selected_genre='Select', editing=True)
 
 
 def check_upload_file(form):
@@ -108,6 +108,18 @@ def check_upload_file(form):
     fp.save(upload_path)
     return db_upload_path
 
+@eventbp.route('/change_status/<id>/<status>')
+@login_required
+def change_status(id, status):
+    event = db.session.scalar(db.select(Event).where(Event.id == id))
+    if (event.user != current_user):
+        flash('You are not the owner of this event', 'error')
+        return redirect(url_for('event.show', id=id))
+    else:
+        event.status = status
+        db.session.commit()
+        flash('Event status changed', 'success')
+        return redirect(url_for('event.show', id=id))
 
 @eventbp.route('/<id>/comment', methods=['GET', 'POST'])
 @login_required
