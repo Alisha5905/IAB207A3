@@ -19,6 +19,8 @@ def show(id):
     comment_form = CommentForm()
     order_form = OrderForm()
 
+    event_url = f'/events/{event.id}'
+
     if event.status != 'Inactive' and event.date < datetime.now():
         event.status = "Inactive"
         db.session.commit()
@@ -35,7 +37,7 @@ def show(id):
     elif event.status == 'Sold Out' and event.quantity > event.quantitySold:
         event.status = "Open"
         db.session.commit()
-    return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form)
+    return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form, event_url=event_url)
 
 
 @eventbp.route('/create', methods=['GET', 'POST'])

@@ -133,18 +133,6 @@
 </footer>
 <!-- JS script for popups -->
 <script>
-   buyTicket.addEventListener("click", function () {
-      buyTicketPopup.classList.add("show");
-   });
-   closePopup.addEventListener("click", function () {
-      buyTicketPopup.classList.remove("show");
-   });
-   window.addEventListener("click", function (event) {
-      if (event.target == buyTicketPopup) {
-         buyTicketPopup.classList.remove("show");
-      }
-   });
-
    comment.addEventListener("click", function () {
       commentPopup.classList.add("show");
    });
@@ -154,6 +142,18 @@
    window.addEventListener("click", function (event) {
       if (event.target == commentPopup) {
          commentPopup.classList.remove("show");
+      }
+   });
+
+   buyTicket.addEventListener("click", function () {
+      buyTicketPopup.classList.add("show");
+   });
+   closePopup.addEventListener("click", function () {
+      buyTicketPopup.classList.remove("show");
+   });
+   window.addEventListener("click", function (event) {
+      if (event.target == buyTicketPopup) {
+         buyTicketPopup.classList.remove("show");
       }
    });
 </script>

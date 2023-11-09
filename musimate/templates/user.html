@@ -24,6 +24,11 @@
                 {{ render_form(form, form_type='horizontal', button_map={'submit': 'btn btn-primary'}) }}
             </div>
         </div>
+        <br>
+        {% if heading == 'Login' %}
+        <p>Don't have an account?</p>
+        <a class="jumbotronButton" href="{{ url_for('auth.register', **request.args) }}" role="button">Register</a>
+        {% endif %}
     </div>
 
 

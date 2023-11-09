@@ -20,11 +20,11 @@
       <div>
          <div class="d-flex justify-content-end align-items-center" style=" height:100%">
             <!-- Button to look at buying tickets -->
-            {% if (event.status != 'Sold Out') and (event.status != 'Inactive') and (event.status != 'Cancelled') %}
+            {% if event.status == 'Open' %}
             {% if current_user.is_authenticated %}
             <button class="breakButton" id="buyTicket">Buy Tickets</button>
             {% else %}
-            <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; ">Login to Buy
+            <a class="breakButton" href="{{ url_for('auth.login', next=event_url) }}" style="text-decoration: none; ">Login to Buy
                Tickets</a>
             {% endif %}
             {% endif %}
@@ -184,7 +184,7 @@
          {% if current_user.is_authenticated %}
          <button class="breakButton" id="comment">Add Comment</button>
          {% else %}
-         <a class="breakButton" href="{{ url_for('auth.login') }}" style="text-decoration: none; ">Login to Comment</a>
+         <a class="breakButton" href="{{ url_for('auth.login', next=event_url) }}" style="text-decoration: none; ">Login to Comment</a>
          {% endif %}
 
          <!-- Comment popup to post a comment -->
