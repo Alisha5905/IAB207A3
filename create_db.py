@@ -38,6 +38,8 @@ event1_date = datetime.strptime(event1_string_date, '%d/%m/%Y %I:%M %p')
 event1_image = '/static/image/otamatone.jpg'
 event1_quantity = 20
 event1_price = 15
+event1_quantity = 30
+event1_quantitySold = 0
 event1_user_id = user_1.id
 event_1 = Event(name=event1_name, description=event1_description, genre=event1_genre, location=event1_location, date=event1_date, image=event1_image, quantity=event1_quantity, price=event1_price, user_id=event1_user_id)
 db.session.add(event_1)
@@ -52,6 +54,8 @@ event2_date = datetime.strptime(event2_string_date, '%d/%m/%Y %I:%M %p')
 event2_image = '/static/image/event2.jpg'
 event2_quantity = 5
 event2_price = 19.99
+event2_quantity = 50
+event2_quantitySold = 0
 event2_user_id = user_1.id
 event_2 = Event(name=event2_name, description=event2_description, genre=event2_genre, location=event2_location, date=event2_date, image=event2_image, quantity=event2_quantity, price=event2_price, user_id=event2_user_id)
 db.session.add(event_2)
@@ -66,6 +70,8 @@ event3_date = datetime.strptime(event3_string_date, '%d/%m/%Y %I:%M %p')
 event3_image = '/static/image/event3.jpg'
 event3_quantity = 200
 event3_price = 10.5
+event3_quantity = 25
+event3_quantitySold = 0
 event3_user_id = user_1.id
 event_3 = Event(name=event3_name, description=event3_description, genre=event3_genre, location=event3_location, date=event3_date, image=event3_image, quantity=event3_quantity, price=event3_price, user_id=event3_user_id)
 db.session.add(event_3)
