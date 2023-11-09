@@ -8,6 +8,9 @@
    <h4>No Events</h4>
 </div>
 {% else %}
+<div class="d-flex p-3 justify-content-start">
+   <h2 style="margin-left: 2px" >Filtered Result(s): </h2>
+</div>
 <div class="card-group">
    {% for event in events %}
    <!-- <div class="card mx-3">

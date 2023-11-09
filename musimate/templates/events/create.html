@@ -35,7 +35,7 @@
     {% if event.status == "Cancelled" %}
     <a class="breakButton" href="{{ url_for('event.change_status', id=event.id, status='Open') }}">Open Event</a>
     {% elif (event.status == "Open") or (event.status == "Sold Out") %}
-    <a class="breakButton" href="{{ url_for('event.change_status', id=event.id, status='Cancelled') }}">Cancel Event</a>
+    <a class="breakButton" id ="cancelButton" href="{{ url_for('event.change_status', id=event.id, status='Cancelled') }}">Cancel Event</a>
     {% endif %}
   </div>
   {% endif %}
