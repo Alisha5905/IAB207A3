@@ -31,7 +31,6 @@ class Event(db.Model):
     description = db.Column(db.String(200))
     genre = db.Column(db.String(40))
     location = db.Column(db.String(200))
-    # possibly make this a date time format
     date = db.Column(db.DateTime)
     image = db.Column(db.String(400))
     quantity = db.Column(db.Integer)

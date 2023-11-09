@@ -34,7 +34,6 @@ def index():
 @mainbp.route('/tickets')
 @login_required
 def tickets():
-    # tickets = db.session.scalars(db.select(Order)).all()
     tickets = db.session.scalars(
         db.select(Order).where(Order.user == current_user)).all()
     genres = db.session.scalars(db.select(Event.genre.distinct())).all()

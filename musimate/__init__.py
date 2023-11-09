@@ -16,8 +16,8 @@ def create_app():
     Bcrypt(app)
 
     #a secret key for the session object
-    #(it would be better to use an environment variable here)
-    app.secret_key = 'somerandomvalue'
+    # created using: python3 -c 'import secrets; print(secrets.token_hex())'
+    app.secret_key = 'bfa5fe7e3d0d18ed9d3285679bfb8c167a1cdc8427ea7760d7a84e583501244c'
 
     #Configue and initialise DB
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///musimate.sqlite'
@@ -54,7 +54,7 @@ def create_app():
     @app.errorhandler(500)
     def internal_server_error(e):
     # note that we set the 500 status explicitly
-      return render_template('500.html'), 500
+      return render_template('500.html', error=e)
 
     #this creates a dictionary of variables that are available
     #to all html templates
