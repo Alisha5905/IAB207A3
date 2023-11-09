@@ -22,8 +22,18 @@ def show(id):
     if event.status != 'Inactive' and event.date < datetime.now():
         event.status = "Inactive"
         db.session.commit()
+    elif event.status == 'Inactive' and event.date > datetime.now():
+        if event.quantity > event.quantitySold:
+            event.status = "Open"
+            db.session.commit()
+        else:
+            event.status = "Sold Out"
+            db.session.commit()
     elif event.status != 'Sold Out' and event.status != 'Cancelled' and event.quantity <= event.quantitySold:
         event.status = "Sold Out"
+        db.session.commit()
+    elif event.status == 'Sold Out' and event.quantity > event.quantitySold:
+        event.status = "Open"
         db.session.commit()
     return render_template('events/show.html', event=event, genres=genres, selected_genre='Select', comment_form=comment_form, order_form=order_form)
 
@@ -108,6 +118,7 @@ def check_upload_file(form):
     fp.save(upload_path)
     return db_upload_path
 
+
 @eventbp.route('/change_status/<id>/<status>')
 @login_required
 def change_status(id, status):
@@ -120,6 +131,7 @@ def change_status(id, status):
         db.session.commit()
         flash('Event status changed', 'success')
         return redirect(url_for('event.show', id=id))
+
 
 @eventbp.route('/<id>/comment', methods=['GET', 'POST'])
 @login_required
