@@ -13,15 +13,6 @@
 </div>
 <div class="card-group">
    {% for event in events %}
-   <!-- <div class="card mx-3">
-               <img class="card-img-top"
-                  src="{{ event.image }}" alt="event picture">
-               <div class="card-body">
-                  <h5 class="card-title">{{ event.name }}</h5>
-                  <p class="card-text">{{ event.description }}</p>
-               </div>
-               <div class="card-footer"><a href="{{ url_for('event.show', id=event.id) }}" class ="btn btn-danger"> View Details </a></div>
-            </div>> -->
    <div class="col-lg-3 col-md-4 col-sm-6 lastCard">
       <a href="{{ url_for('event.show', id=event.id) }}" style="text-decoration:none">
          <div class="card border-light">
@@ -566,7 +557,7 @@
          <p class="lead">Are you an artist that wants to promote their latest upcoming show?</p>
          <hr class="my-4">
          <p>Sign up today to release your events on MusiMate!</p>
-         <a class="jumbotronButton" href="#" role="button">Register</a>
+         <a class="jumbotronButton" href="{{ url_for('auth.register') }}" role="button">Register</a>
       </div>
    </div>
 </div>
