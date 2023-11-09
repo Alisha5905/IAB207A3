@@ -158,31 +158,41 @@ def comment(id):
 @login_required
 def order(id):
     form = OrderForm()
+    # get event object from DB associated with current order
     event = db.session.scalar(db.select(Event).where(Event.id == id))
+    # from event object isloate allocatedTix & quatitySold for that event
     allocatedTix = db.session.scalar(
         db.select(Event.quantity).where(Event.id == id))
     quantitySold = db.session.scalar(
         db.select(Event.quantitySold).where(Event.id == id))
+    # calculate the number of tickets that can be purchased.
     availableTix = allocatedTix - quantitySold
+    # if there are no tix left: can't purchase tickets
     if availableTix <= 0:
         flash("Event is sold out!!", 'error')
         return redirect(url_for('event.show', id=id))
 
     elif form.validate_on_submit():
+        # read data from form
         orderQuant = form.quantity.data
-
+        # if the order quantity more than available purchase will fail
         if orderQuant > availableTix:
             flash("Not enough tickets available", 'error')
             return redirect(url_for('event.show', id=id))
-
+      # if order quantity is less than available tix proceed with placing the order
         elif orderQuant <= availableTix:
             order = Order(quantity=form.quantity.data, event=event,
                           user=current_user)
+            #back referencing - order.event is set and link created
             db.session.add(order)
+            # add the order to the DB
             event.quantitySold += orderQuant
+            # update the quantitySold on the event 
             db.session.commit()
+            #display message:
             flash('Your order has been placed.\n' +
                   f'Order Number: {order.order_id}E{event.id}Q{orderQuant}#{datetime.now().toordinal()}', 'success')
+            
             return redirect(url_for('event.show', id=id))
 
     else:
