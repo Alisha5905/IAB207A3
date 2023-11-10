@@ -237,6 +237,24 @@ comment_7 = Comment(text=comment7_text, user_id=comment7_user_id, event_id=comme
 db.session.add(comment_7)
 db.session.commit()
 
+comment8_text = "Can't wait to see everyone at my 'Greatest Hits'! It's never going to give you up - get your tickets now!"
+comment8_user_id = user_4.id
+comment8_event_id = event_8.id 
+comment_8 = Comment(text=comment8_text, user_id=comment8_user_id, event_id=comment8_event_id)
+db.session.add(comment_8)
+
+comment9_text = "as an absolutely fan of Studio Ghibli, im really thrilled for Joe Hisaishi's Classical concert.. Can't wait"
+comment9_user_id = user_7.id
+comment9_event_id = event_7.id
+comment_9 = Comment(text=comment9_text, user_id=comment9_user_id, event_id=comment9_event_id)
+db.session.add(comment_9)
+
+comment10_text = "Its a shame that the rap concert was cancelled :( Was looking forward to it, hopefully, there'll be another chance soon!"
+comment10_user_id = user_1.id 
+comment10_event_id = event_4.id
+comment_10 = Comment(text=comment10_text, user_id=comment10_user_id, event_id=comment10_event_id)
+db.session.add(comment_10)
+
 order1_quantity = 5
 order1_user_id = user_1.id
 order1_event_id = event_1.id
