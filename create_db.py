@@ -180,7 +180,7 @@ db.session.add(comment_1)
 db.session.commit()
 
 comment2_text = 'I love listening to classical music. It is so relaxing.'
-comment2_user_id = user_1.id
+comment2_user_id = user_4.id
 comment2_event_id = event_2.id
 comment_2 = Comment(text=comment2_text, user_id=comment2_user_id, event_id=comment2_event_id)
 db.session.add(comment_2)
@@ -191,6 +191,35 @@ comment3_user_id = user_1.id
 comment3_event_id = event_3.id
 comment_3 = Comment(text=comment3_text, user_id=comment3_user_id, event_id=comment3_event_id)
 db.session.add(comment_3)
+db.session.commit()
+
+comment4_text = 'Never going to give you up!'
+comment4_user_id = user_1.id
+comment4_event_id = event_2.id
+comment_4 = Comment(text=comment4_text, user_id=comment4_user_id, event_id=comment4_event_id)
+db.session.add(comment_4)
+db.session.commit()
+
+
+comment5_text = "I'll see you in the pits"
+comment5_user_id = user_1.id
+comment5_event_id = event_5.id
+comment_5 = Comment(text=comment5_text, user_id=comment5_user_id, event_id=comment5_event_id)
+db.session.add(comment_5)
+db.session.commit()
+
+comment6_text = "DRAINNNNGGGG GANNNNGGGG"
+comment6_user_id = user_5.id
+comment6_event_id = event_6.id
+comment_6 = Comment(text=comment6_text, user_id=comment6_user_id, event_id=comment6_event_id)
+db.session.add(comment_6)
+db.session.commit()
+
+comment7_text = "Lesss goooo"
+comment7_user_id = user_3.id
+comment7_event_id = event_2.id
+comment_7 = Comment(text=comment7_text, user_id=comment7_user_id, event_id=comment7_event_id)
+db.session.add(comment_7)
 db.session.commit()
 
 order1_quantity = 5

@@ -70,7 +70,7 @@ def login():
                     return redirect(request.args['next'])
             return redirect(url_for('main.index'))
         else:
-            flash(error)
+            flash(error,'error')
     return render_template('user.html', form=login_form, heading='Login', genres=genres, selected_genre='Select')
 
 
