@@ -11,11 +11,11 @@ db.drop_all()
 db.create_all()
 
 # Populate the database with sample data
-user1_name = 'Rick Astley'
-user1_password = generate_password_hash('1234')
-user1_email = 'rick@astely.com'
-user1_contact_number = '424141'
-user1_address = 'Rick Roll Street'
+user1_name = 'Nemo Johnson'
+user1_password = generate_password_hash('password123')
+user1_email = 'nemo.johnson@email.com'
+user1_contact_number = '0481 234 567'
+user1_address = '42 Wallaby Way, Sydney, NSW 2000'
 user_1 = User(name=user1_name, password_hash=user1_password, email=user1_email, contact_number=user1_contact_number, address=user1_address)
 db.session.add(user_1)
 db.session.commit()
@@ -37,6 +37,25 @@ user3_address = '59 Wrong Road'
 user_3 = User(name=user3_name, password_hash=user3_password, email=user3_email, contact_number=user3_contact_number, address=user3_address)
 db.session.add(user_3)
 db.session.commit()
+
+user4_name = 'Rick Astley'
+user4_password = generate_password_hash('1234')
+user4_email = 'rick@astely.com'
+user4_contact_number = '424141'
+user4_address = 'Rick Roll Street'
+user_4 = User(name=user4_name, password_hash=user4_password, email=user4_email, contact_number=user4_contact_number, address=user4_address)
+db.session.add(user_4)
+db.session.commit()
+
+user5_name = 'Joe Hisaishi'
+user5_password = generate_password_hash('1234')
+user5_email = 'joe.hisaishi@email.com'
+user5_contact_number = '0451 678 900'
+user5_address = '33 studio Ghibli Street'
+user_5 = User(name=user5_name, password_hash=user5_password, email=user5_email, contact_number=user5_contact_number, address=user5_address)
+db.session.add(user_5)
+db.session.commit()
+
 
 event1_name = 'Omatone Concert'
 event1_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
@@ -122,6 +141,35 @@ event6_user_id = user_2.id
 event_6= Event(name=event6_name, description=event6_description , genre=event6_genre, location=event6_location, date=event6_date, image=event6_image, quantity=event6_quantity, price=event6_price, user_id=event6_user_id)
 db.session.add(event_6)
 db.session.commit()
+
+event7_name = "Joe Hisaishi's Classical"
+event7_description = "Immerse yourself in the enchanting world of Joe Hisaishi as he conducts a captivating evening of his most beloved compositions. From the whimsical tunes of Studio Ghibli to his evocative symphonic works, this performance will be a celebration of Hisaishi's illustrious career."
+event7_genre = 'Classical'
+event7_location = 'Sydney Opera House'
+event7_string_date = '25/12/2023 07:30 PM'
+event7_date = datetime.strptime(event7_string_date, '%d/%m/%Y %I:%M %p')
+event7_image = '/static/image/event4.jpg'
+event7_quantity = 300
+event7_price = 20.00
+event7_user_id = user_5.id
+event_7 = Event(name=event7_name, description=event7_description, genre=event7_genre, location=event7_location, date=event7_date, image=event7_image, quantity=event7_quantity, price=event7_price, user_id=event7_user_id)
+event_7.status = 'Open'
+db.session.add(event_7)
+
+event8_name = "Rick Astley's Greatest Hits"
+event8_description = "Join the unforgettable Rick Astley as he hits the stage with his enduring classics and sensational new hits. A night of nostalgic melodies and uplifting tunes awaits!"
+event8_genre = 'Pop'
+event8_location = 'Gold Coast'
+event8_string_date = '21/12/2023 12:30 PM'
+event8_date = datetime.strptime(event8_string_date, '%d/%m/%Y %I:%M %p')
+event8_image = '/static/image/event5.jpg'
+event8_quantity = 50000
+event8_price = 99.95
+event8_user_id = user_4.id
+event_8 = Event(name=event8_name, description=event8_description, genre=event8_genre, location=event8_location, date=event8_date, image=event8_image, quantity=event8_quantity, price=event8_price, user_id=event8_user_id)
+event_8.status = 'Open'
+db.session.add(event_8)
+
 
 
 comment1_text = 'Looking forward to this event!'
