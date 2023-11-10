@@ -86,6 +86,16 @@
 }
 
 /* flash messages */
+.alert {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
 #error{
     background-color: lightcoral;
 }
