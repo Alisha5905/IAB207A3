@@ -156,6 +156,16 @@
          buyTicketPopup.classList.remove("show");
       }
    });
+
+   
+   function calculatePrice() {
+    var ticketPrice = parseFloat(document.getElementById("ticket_price").innerText);
+    var numTix = parseFloat(document.getElementById("num_tix").value);
+    
+    if (!isNaN(ticketPrice) && !isNaN(numTix)) {
+        var total = numTix * ticketPrice;
+        document.getElementById("totalPrice").innerText = total.toFixed(2);
+    }}
 </script>
 
 </html>

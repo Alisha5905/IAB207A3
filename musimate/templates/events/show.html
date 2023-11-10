@@ -70,20 +70,27 @@
 
 
                         <div class="row">
-                           <div class="d-flex justify-content-around" style="margin-top: 20px; margin-bottom: 20px;">
+                           <div class="d-flex justify-content-around" style="margin-top: 20px; margin-bottom: 10px;">
                               <div>General Admission:</div>
-                              <div> ${{'{:.2f}'.format(event.price)}} </div>
-
+                              <div> $<span id='ticket_price'>{{'{:.2f}'.format(event.price)}}</span></div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="d-flex justify-content-around" style="margin-top: 5px; margin-bottom: 20px;
+                           color:grey">
+                              <div>Tickets Available:</div>
+                              <div> {{event.quantity - event.quantitySold}}</div>
                            </div>
                         </div>
                         <!--- order form -->
                         <div class="row orderForm">
                            {{render_form(order_form,"/events/{0}/order".format(event.id))}}
+
                         </div>
                         <div class="row">
                            <div class="d-flex justify-content-left summary" style="margin-top: 10px;">
                               <div style="padding-right: 10px;">Total Cost:</div>
-                              <div> $XX.XX </div>
+                              <div> $<span id="totalPrice">0.00</span></div>
                            </div>
                         </div>
 
