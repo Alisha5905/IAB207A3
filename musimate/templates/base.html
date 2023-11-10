@@ -158,14 +158,16 @@
    });
 
    
-   function calculatePrice() {
+   let quantity_select = document.getElementById("quantity");
+   quantity_select.onchange = function(){
     var ticketPrice = parseFloat(document.getElementById("ticket_price").innerText);
-    var numTix = parseFloat(document.getElementById("num_tix").value);
+    var numTix = parseFloat(document.getElementById("quantity").value);
     
     if (!isNaN(ticketPrice) && !isNaN(numTix)) {
         var total = numTix * ticketPrice;
         document.getElementById("totalPrice").innerText = total.toFixed(2);
-    }}
+    }};
+    
 </script>
 
 </html>
