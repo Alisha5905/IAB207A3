@@ -56,6 +56,21 @@ user_5 = User(name=user5_name, password_hash=user5_password, email=user5_email, 
 db.session.add(user_5)
 db.session.commit()
 
+user6_name = 'James Robert'
+user6_password = generate_password_hash('1234')
+user6_email = 'james.robert@email.com'
+user6_contact_number = '0491 345 678'
+user6_address = '108 Throwaway Street'
+user_6 = User(name=user6_name, password_hash=user6_password, email=user6_email, contact_number=user6_contact_number, address=user6_address)
+db.session.add(user_6)
+
+user7_name = 'Chris Green'
+user7_password = generate_password_hash('1234')
+user7_email = 'chris.green@email.com'
+user7_contact_number = '0471 456 789'
+user7_address = '56 High Street'
+user_7 = User(name=user7_name, password_hash=user7_password, email=user7_email, contact_number=user7_contact_number, address=user7_address)
+db.session.add(user_7)
 
 event1_name = 'Omatone Concert'
 event1_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
