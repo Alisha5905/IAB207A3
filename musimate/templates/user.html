@@ -26,8 +26,9 @@
         </div>
         <br>
         {% if heading == 'Login' %}
-        <p>Don't have an account?</p>
-        <a class="jumbotronButton" href="{{ url_for('auth.register', **request.args) }}" role="button">Register</a>
+        <div class="account-query">
+        <p>Don't have an account? <a class="jumbotronButton" id="registerButton" href="{{ url_for('auth.register', **request.args) }}">Register</a></p>
+        </div>
         {% endif %}
     </div>
 

@@ -222,7 +222,7 @@
 
 .searchSubmit:hover,
 .jumbotronButton:hover {
-    background-color: rgba(113, 171, 205, 0.5);
+    background-color: rgba(113, 171, 205, 0.8);
 }
 
 /* ---------------- */
@@ -520,8 +520,24 @@ p.cardDetails {
     background-color: rgba(93, 143, 171);
     font-size: large;
     font-weight: bold;
-    padding: 10px;
+    padding: 6px;
     text-decoration: none;
+}
+
+.registerButton {
+    color: rgba(245, 245, 245);
+    border-radius: 11px;
+    border-color: rgba(245, 245, 245);
+    background-color: rgba(113, 179, 216, .5);
+    font-size: large;
+    font-weight: bold;
+    padding: 6px;
+    text-decoration: none;
+}
+
+.registerButton:hover  {
+    background-color: rgba(113, 171, 205, 0.5);
+    border-color: rgba(245, 245, 245);
 }
 
 /* -----Form Styles------- */
